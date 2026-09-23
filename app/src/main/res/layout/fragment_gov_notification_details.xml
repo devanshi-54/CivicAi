@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_light"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Government Notification Details"
+        android:textColor="@color/dark_navy"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <com.google.android.material.card.MaterialCardView
+        style="@style/CivicAi.Card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/tvGovNotifDetailId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ID: NOTIF-GOV-01"
+                android:textColor="@color/high_priority"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvGovNotifDetailTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Critical Priority Triage Alert"
+                android:textColor="@color/primary_text"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvGovNotifDetailMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="AI prioritized complaint #CMP-GOV-01 as HIGH severity in Ward 12."
+                android:textColor="@color/secondary_text"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnGovGoToRelatedComplaint"
+        style="@style/CivicAi.Button.Primary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="View Related Complaint" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnBackFromGovNotifDetails"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Back to Notifications" />
+
+</LinearLayout>

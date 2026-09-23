@@ -1,0 +1,54 @@
+[
+    {
+        "merged": "com.civicai.app-mergeDebugResources-3:/layout/fragment_gov_complaint_map.xml",
+        "source": "com.civicai.app-main-6:/layout/fragment_gov_complaint_map.xml"
+    },
+    {
+        "merged": "com.civicai.app-mergeDebugResources-3:/layout/activity_citizen_main.xml",
+        "source": "com.civicai.app-main-6:/layout/activity_citizen_main.xml"
+    },
+    {
+        "merged": "com.civicai.app-mergeDebugResources-3:/layout/fragment_gov_dashboard.xml",
+        "source": "com.civicai.app-main-6:/layout/fragment_gov_dashboard.xml"
+    },
+    {
+        "merged": "com.civicai.app-mergeDebugResources-3:/layout/activity_gov_main.xml",
+        "source": "com.civicai.app-main-6:/layout/activity_gov_main.xml"
+    },
+    {
+        "merged": "com.civicai.app-mergeDebugResources-3:/layout/fragment_citizen_home.xml",
+        "source": "com.civicai.app-main-6:/layout/fragment_citizen_home.xml"
+    },
+    {
+        "merged": "com.civicai.app-mergeDebugResources-3:/layout/fragment_citizen_report.xml",
+        "source": "com.civicai.app-main-6:/layout/fragment_citizen_report.xml"
+    },
+    {
+        "merged": "com.civicai.app-mergeDebugResources-3:/layout/activity_main.xml",
+        "source": "com.civicai.app-main-6:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.civicai.app-mergeDebugResources-3:/layout/fragment_gov_priority_queue.xml",
+        "source": "com.civicai.app-main-6:/layout/fragment_gov_priority_queue.xml"
+    },
+    {
+        "merged": "com.civicai.app-mergeDebugResources-3:/layout/fragment_citizen_profile.xml",
+        "source": "com.civicai.app-main-6:/layout/fragment_citizen_profile.xml"
+    },
+    {
+        "merged": "com.civicai.app-mergeDebugResources-3:/layout/fragment_gov_issue_clusters.xml",
+        "source": "com.civicai.app-main-6:/layout/fragment_gov_issue_clusters.xml"
+    },
+    {
+        "merged": "com.civicai.app-mergeDebugResources-3:/layout/fragment_citizen_notifications.xml",
+        "source": "com.civicai.app-main-6:/layout/fragment_citizen_notifications.xml"
+    },
+    {
+        "merged": "com.civicai.app-mergeDebugResources-3:/layout/fragment_citizen_my_complaints.xml",
+        "source": "com.civicai.app-main-6:/layout/fragment_citizen_my_complaints.xml"
+    },
+    {
+        "merged": "com.civicai.app-mergeDebugResources-3:/layout/fragment_gov_analytics.xml",
+        "source": "com.civicai.app-main-6:/layout/fragment_gov_analytics.xml"
+    }
+]

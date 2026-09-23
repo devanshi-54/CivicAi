@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Stitch Design System Palette -->
+    <color name="primary_blue">#155EEF</color>
+    <color name="dark_navy">#0B1F3A</color>
+    <color name="background_light">#F7F9FC</color>
+    <color name="card_surface">#FFFFFF</color>
+    <color name="primary_text">#172B4D</color>
+    <color name="secondary_text">#667085</color>
+    <color name="border_color">#E4E7EC</color>
+
+    <!-- Semantic & Priority Colors -->
+    <color name="success_color">#12B76A</color>
+    <color name="success_bg">#ECFDF3</color>
+    <color name="medium_priority">#F79009</color>
+    <color name="medium_priority_bg">#FEF0C7</color>
+    <color name="high_priority">#F04438</color>
+    <color name="high_priority_bg">#FEE4E2</color>
+    <color name="low_priority">#027A48</color>
+    <color name="low_priority_bg">#D1FADF</color>
+
+    <!-- AI Accent Colors -->
+    <color name="ai_accent">#7A5AF8</color>
+    <color name="ai_accent_bg">#F4EBFF</color>
+    <color name="ai_accent_light">#EBE9FE</color>
+
+    <!-- Status Colors -->
+    <color name="status_submitted">#6172F3</color>
+    <color name="status_submitted_bg">#EEF4FF</color>
+    <color name="status_under_review">#F79009</color>
+    <color name="status_under_review_bg">#FEF0C7</color>
+    <color name="status_assigned">#7A5AF8</color>
+    <color name="status_assigned_bg">#F4EBFF</color>
+    <color name="status_in_progress">#155EEF</color>
+    <color name="status_in_progress_bg">#E0EAFF</color>
+    <color name="status_resolved">#12B76A</color>
+    <color name="status_resolved_bg">#ECFDF3</color>
+    <color name="status_rejected">#667085</color>
+    <color name="status_rejected_bg">#F2F4F7</color>
+
+    <!-- Neutrals -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="gray_50">#F9FAFB</color>
+    <color name="gray_100">#F2F4F7</color>
+    <color name="gray_200">#E4E7EC</color>
+    <color name="gray_300">#D0D5DD</color>
+    <color name="gray_500">#667085</color>
+    <color name="gray_700">#344054</color>
+    <color name="gray_900">#101828</color>
+    
+    <!-- Transparent -->
+    <color name="transparent">#00000000</color>
+</resources>

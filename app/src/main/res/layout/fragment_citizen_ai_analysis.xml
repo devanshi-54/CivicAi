@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_light"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <ProgressBar
+        android:id="@+id/pbAiAnalyzing"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:indeterminateTint="@color/ai_accent" />
+
+    <TextView
+        android:id="@+id/tvAiAnalysisTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Citizen AI Analysis"
+        android:textColor="@color/dark_navy"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvAiAnalysisSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="AI is evaluating complaint severity, urgency, and suggesting responsible civic department..."
+        android:textColor="@color/secondary_text"
+        android:textSize="14sp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnProceedToSubmitted"
+        style="@style/CivicAi.Button.Ai"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="View AI Triage &amp; Confirm Submission" />
+
+</LinearLayout>

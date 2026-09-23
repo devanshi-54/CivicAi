@@ -1,0 +1,134 @@
+[
+    {
+        "merged": "com.civicai.app-debug-4:/layout_fragment_citizen_my_complaints.xml.flat",
+        "source": "com.civicai.app-main-6:/layout/fragment_citizen_my_complaints.xml"
+    },
+    {
+        "merged": "com.civicai.app-debug-4:/drawable_ic_profile.xml.flat",
+        "source": "com.civicai.app-main-6:/drawable/ic_profile.xml"
+    },
+    {
+        "merged": "com.civicai.app-debug-4:/drawable_ic_priority.xml.flat",
+        "source": "com.civicai.app-main-6:/drawable/ic_priority.xml"
+    },
+    {
+        "merged": "com.civicai.app-debug-4:/navigation_nav_citizen.xml.flat",
+        "source": "com.civicai.app-main-6:/navigation/nav_citizen.xml"
+    },
+    {
+        "merged": "com.civicai.app-debug-4:/drawable_ic_ai_sparkle.xml.flat",
+        "source": "com.civicai.app-main-6:/drawable/ic_ai_sparkle.xml"
+    },
+    {
+        "merged": "com.civicai.app-debug-4:/layout_fragment_gov_analytics.xml.flat",
+        "source": "com.civicai.app-main-6:/layout/fragment_gov_analytics.xml"
+    },
+    {
+        "merged": "com.civicai.app-debug-4:/drawable_ic_analytics.xml.flat",
+        "source": "com.civicai.app-main-6:/drawable/ic_analytics.xml"
+    },
+    {
+        "merged": "com.civicai.app-debug-4:/drawable_bg_badge_ai.xml.flat",
+        "source": "com.civicai.app-main-6:/drawable/bg_badge_ai.xml"
+    },
+    {
+        "merged": "com.civicai.app-debug-4:/layout_fragment_gov_issue_clusters.xml.flat",
+        "source": "com.civicai.app-main-6:/layout/fragment_gov_issue_clusters.xml"
+    },
+    {
+        "merged": "com.civicai.app-debug-4:/menu_gov_bottom_nav.xml.flat",
+        "source": "com.civicai.app-main-6:/menu/gov_bottom_nav.xml"
+    },
+    {
+        "merged": "com.civicai.app-debug-4:/drawable_ic_cluster.xml.flat",
+        "source": "com.civicai.app-main-6:/drawable/ic_cluster.xml"
+    },
+    {
+        "merged": "com.civicai.app-debug-4:/layout_activity_gov_main.xml.flat",
+        "source": "com.civicai.app-main-6:/layout/activity_gov_main.xml"
+    },
+    {
+        "merged": "com.civicai.app-debug-4:/drawable_ic_list.xml.flat",
+        "source": "com.civicai.app-main-6:/drawable/ic_list.xml"
+    },
+    {
+        "merged": "com.civicai.app-debug-4:/drawable_ic_map.xml.flat",
+        "source": "com.civicai.app-main-6:/drawable/ic_map.xml"
+    },
+    {
+        "merged": "com.civicai.app-debug-4:/layout_activity_main.xml.flat",
+        "source": "com.civicai.app-main-6:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.civicai.app-debug-4:/layout_fragment_citizen_profile.xml.flat",
+        "source": "com.civicai.app-main-6:/layout/fragment_citizen_profile.xml"
+    },
+    {
+        "merged": "com.civicai.app-debug-4:/layout_fragment_gov_priority_queue.xml.flat",
+        "source": "com.civicai.app-main-6:/layout/fragment_gov_priority_queue.xml"
+    },
+    {
+        "merged": "com.civicai.app-debug-4:/drawable_ic_notifications.xml.flat",
+        "source": "com.civicai.app-main-6:/drawable/ic_notifications.xml"
+    },
+    {
+        "merged": "com.civicai.app-debug-4:/layout_fragment_citizen_report.xml.flat",
+        "source": "com.civicai.app-main-6:/layout/fragment_citizen_report.xml"
+    },
+    {
+        "merged": "com.civicai.app-debug-4:/drawable_ic_dashboard.xml.flat",
+        "source": "com.civicai.app-main-6:/drawable/ic_dashboard.xml"
+    },
+    {
+        "merged": "com.civicai.app-debug-4:/layout_fragment_citizen_home.xml.flat",
+        "source": "com.civicai.app-main-6:/layout/fragment_citizen_home.xml"
+    },
+    {
+        "merged": "com.civicai.app-debug-4:/layout_activity_citizen_main.xml.flat",
+        "source": "com.civicai.app-main-6:/layout/activity_citizen_main.xml"
+    },
+    {
+        "merged": "com.civicai.app-debug-4:/navigation_nav_government.xml.flat",
+        "source": "com.civicai.app-main-6:/navigation/nav_government.xml"
+    },
+    {
+        "merged": "com.civicai.app-debug-4:/drawable_ic_report.xml.flat",
+        "source": "com.civicai.app-main-6:/drawable/ic_report.xml"
+    },
+    {
+        "merged": "com.civicai.app-debug-4:/drawable_bg_card_bordered.xml.flat",
+        "source": "com.civicai.app-main-6:/drawable/bg_card_bordered.xml"
+    },
+    {
+        "merged": "com.civicai.app-debug-4:/drawable_bg_badge_high_priority.xml.flat",
+        "source": "com.civicai.app-main-6:/drawable/bg_badge_high_priority.xml"
+    },
+    {
+        "merged": "com.civicai.app-debug-4:/menu_citizen_bottom_nav.xml.flat",
+        "source": "com.civicai.app-main-6:/menu/citizen_bottom_nav.xml"
+    },
+    {
+        "merged": "com.civicai.app-debug-4:/layout_fragment_gov_complaint_map.xml.flat",
+        "source": "com.civicai.app-main-6:/layout/fragment_gov_complaint_map.xml"
+    },
+    {
+        "merged": "com.civicai.app-debug-4:/drawable_ic_home.xml.flat",
+        "source": "com.civicai.app-main-6:/drawable/ic_home.xml"
+    },
+    {
+        "merged": "com.civicai.app-debug-4:/drawable_bg_badge_low_priority.xml.flat",
+        "source": "com.civicai.app-main-6:/drawable/bg_badge_low_priority.xml"
+    },
+    {
+        "merged": "com.civicai.app-debug-4:/layout_fragment_citizen_notifications.xml.flat",
+        "source": "com.civicai.app-main-6:/layout/fragment_citizen_notifications.xml"
+    },
+    {
+        "merged": "com.civicai.app-debug-4:/layout_fragment_gov_dashboard.xml.flat",
+        "source": "com.civicai.app-main-6:/layout/fragment_gov_dashboard.xml"
+    },
+    {
+        "merged": "com.civicai.app-debug-4:/drawable_bg_badge_medium_priority.xml.flat",
+        "source": "com.civicai.app-main-6:/drawable/bg_badge_medium_priority.xml"
+    }
+]

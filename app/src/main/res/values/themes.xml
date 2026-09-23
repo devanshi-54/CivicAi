@@ -1,0 +1,61 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.CivicAI" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/primary_blue</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">@color/status_in_progress_bg</item>
+        <item name="colorOnPrimaryContainer">@color/dark_navy</item>
+
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/ai_accent</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSecondaryContainer">@color/ai_accent_bg</item>
+        <item name="colorOnSecondaryContainer">@color/dark_navy</item>
+
+        <!-- Status bar and navigation bar color. -->
+        <item name="android:statusBarColor">@color/background_light</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@color/card_surface</item>
+        <item name="android:windowLightNavigationBar">true</item>
+
+        <!-- Backgrounds -->
+        <item name="android:colorBackground">@color/background_light</item>
+        <item name="colorSurface">@color/card_surface</item>
+        <item name="colorOnSurface">@color/primary_text</item>
+    </style>
+
+    <!-- Custom Widget Styles -->
+    <style name="CivicAi.Card" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardBackgroundColor">@color/card_surface</item>
+        <item name="cardCornerRadius">12dp</item>
+        <item name="cardElevation">2dp</item>
+        <item name="strokeColor">@color/border_color</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+
+    <style name="CivicAi.Card.Ai" parent="CivicAi.Card">
+        <item name="cardBackgroundColor">@color/ai_accent_bg</item>
+        <item name="strokeColor">@color/ai_accent_light</item>
+    </style>
+
+    <style name="CivicAi.Button.Primary" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/primary_blue</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="cornerRadius">8dp</item>
+    </style>
+
+    <style name="CivicAi.Button.Ai" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/ai_accent</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="cornerRadius">8dp</item>
+    </style>
+
+    <style name="CivicAi.Chip.Priority.High" parent="Widget.Material3.Chip.Assist">
+        <item name="chipBackgroundColor">@color/high_priority_bg</item>
+        <item name="android:textColor">@color/high_priority</item>
+        <item name="chipStrokeColor">@color/high_priority</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipCornerRadius">16dp</item>
+    </style>
+</resources>

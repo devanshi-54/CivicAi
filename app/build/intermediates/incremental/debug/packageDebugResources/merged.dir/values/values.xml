@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ai_accent">#7A5AF8</color>
+    <color name="ai_accent_bg">#F4EBFF</color>
+    <color name="ai_accent_light">#EBE9FE</color>
+    <color name="background_light">#F7F9FC</color>
+    <color name="black">#000000</color>
+    <color name="border_color">#E4E7EC</color>
+    <color name="card_surface">#FFFFFF</color>
+    <color name="dark_navy">#0B1F3A</color>
+    <color name="gray_100">#F2F4F7</color>
+    <color name="gray_200">#E4E7EC</color>
+    <color name="gray_300">#D0D5DD</color>
+    <color name="gray_50">#F9FAFB</color>
+    <color name="gray_500">#667085</color>
+    <color name="gray_700">#344054</color>
+    <color name="gray_900">#101828</color>
+    <color name="high_priority">#F04438</color>
+    <color name="high_priority_bg">#FEE4E2</color>
+    <color name="low_priority">#027A48</color>
+    <color name="low_priority_bg">#D1FADF</color>
+    <color name="medium_priority">#F79009</color>
+    <color name="medium_priority_bg">#FEF0C7</color>
+    <color name="primary_blue">#155EEF</color>
+    <color name="primary_text">#172B4D</color>
+    <color name="secondary_text">#667085</color>
+    <color name="status_assigned">#7A5AF8</color>
+    <color name="status_assigned_bg">#F4EBFF</color>
+    <color name="status_in_progress">#155EEF</color>
+    <color name="status_in_progress_bg">#E0EAFF</color>
+    <color name="status_rejected">#667085</color>
+    <color name="status_rejected_bg">#F2F4F7</color>
+    <color name="status_resolved">#12B76A</color>
+    <color name="status_resolved_bg">#ECFDF3</color>
+    <color name="status_submitted">#6172F3</color>
+    <color name="status_submitted_bg">#EEF4FF</color>
+    <color name="status_under_review">#F79009</color>
+    <color name="status_under_review_bg">#FEF0C7</color>
+    <color name="success_bg">#ECFDF3</color>
+    <color name="success_color">#12B76A</color>
+    <color name="transparent">#00000000</color>
+    <color name="white">#FFFFFF</color>
+    <dimen name="radius_lg">16dp</dimen>
+    <dimen name="radius_md">12dp</dimen>
+    <dimen name="radius_round">24dp</dimen>
+    <dimen name="radius_sm">6dp</dimen>
+    <dimen name="spacing_lg">24dp</dimen>
+    <dimen name="spacing_md">16dp</dimen>
+    <dimen name="spacing_sm">8dp</dimen>
+    <dimen name="spacing_xl">32dp</dimen>
+    <dimen name="spacing_xs">4dp</dimen>
+    <dimen name="text_display">28sp</dimen>
+    <dimen name="text_lg">18sp</dimen>
+    <dimen name="text_md">16sp</dimen>
+    <dimen name="text_sm">14sp</dimen>
+    <dimen name="text_xl">22sp</dimen>
+    <dimen name="text_xs">12sp</dimen>
+    <string name="ai_analyzing">Analyzing complaint with AI…</string>
+    <string name="ai_disclaimer">AI recommendations are advisory decision-support and do not replace authorized government decisions.</string>
+    <string name="ai_recommendation">AI Recommendation</string>
+    <string name="app_name">CivicAI</string>
+    <string name="app_tagline">AI-Driven Citizen Complaint Prioritization</string>
+    <string name="btn_assign_department">Assign Department</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_retry">Retry</string>
+    <string name="btn_submit">Submit Complaint</string>
+    <string name="btn_update_status">Update Status</string>
+    <string name="btn_view_details">View Details</string>
+    <string name="loading">Loading…</string>
+    <string name="nav_analytics">Analytics</string>
+    <string name="nav_clusters">Clusters</string>
+    <string name="nav_complaints">Complaints</string>
+    <string name="nav_dashboard">Dashboard</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_map">Map</string>
+    <string name="nav_my_complaints">My Complaints</string>
+    <string name="nav_notifications">Notifications</string>
+    <string name="nav_priority_queue">Priority Queue</string>
+    <string name="nav_profile">Profile</string>
+    <string name="nav_report">Report</string>
+    <string name="official_decision">Official Decision</string>
+    <string name="priority_high">High Priority</string>
+    <string name="priority_low">Low Priority</string>
+    <string name="priority_medium">Medium Priority</string>
+    <string name="role_citizen">Citizen</string>
+    <string name="role_government">Government Official</string>
+    <string name="select_role_prompt">Select your workspace role to proceed</string>
+    <string name="status_assigned">Assigned</string>
+    <string name="status_in_progress">In Progress</string>
+    <string name="status_rejected">Rejected</string>
+    <string name="status_resolved">Resolved</string>
+    <string name="status_submitted">Submitted</string>
+    <string name="status_under_review">Under Review</string>
+    <style name="CivicAi.Button.Ai" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/ai_accent</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="cornerRadius">8dp</item>
+    </style>
+    <style name="CivicAi.Button.Primary" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/primary_blue</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="cornerRadius">8dp</item>
+    </style>
+    <style name="CivicAi.Card" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardBackgroundColor">@color/card_surface</item>
+        <item name="cardCornerRadius">12dp</item>
+        <item name="cardElevation">2dp</item>
+        <item name="strokeColor">@color/border_color</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+    <style name="CivicAi.Card.Ai" parent="CivicAi.Card">
+        <item name="cardBackgroundColor">@color/ai_accent_bg</item>
+        <item name="strokeColor">@color/ai_accent_light</item>
+    </style>
+    <style name="CivicAi.Chip.Priority.High" parent="Widget.Material3.Chip.Assist">
+        <item name="chipBackgroundColor">@color/high_priority_bg</item>
+        <item name="android:textColor">@color/high_priority</item>
+        <item name="chipStrokeColor">@color/high_priority</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipCornerRadius">16dp</item>
+    </style>
+    <style name="Theme.CivicAI" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        <item name="colorPrimary">@color/primary_blue</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">@color/status_in_progress_bg</item>
+        <item name="colorOnPrimaryContainer">@color/dark_navy</item>
+
+        
+        <item name="colorSecondary">@color/ai_accent</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSecondaryContainer">@color/ai_accent_bg</item>
+        <item name="colorOnSecondaryContainer">@color/dark_navy</item>
+
+        
+        <item name="android:statusBarColor">@color/background_light</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@color/card_surface</item>
+        <item name="android:windowLightNavigationBar">true</item>
+
+        
+        <item name="android:colorBackground">@color/background_light</item>
+        <item name="colorSurface">@color/card_surface</item>
+        <item name="colorOnSurface">@color/primary_text</item>
+    </style>
+</resources>
