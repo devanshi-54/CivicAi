@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<item type="drawable" name="ic_bell">@drawable/ic_notifications</item>
+<item type="drawable" name="ic_civicai_logo">@drawable/ic_ai_sparkle</item>
+<item type="drawable" name="ic_file_list">@drawable/ic_list</item>
+<item type="drawable" name="ic_speaker">@drawable/ic_report</item>
+<item type="drawable" name="ic_track_radar">@drawable/ic_map</item>
+<item type="drawable" name="avatar_devanshi">@drawable/ic_profile</item>
+</resources>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/civic_bg">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/civic_surface"
+        app:title="Complaint Details"
+        app:titleTextColor="@color/civic_navy"
+        app:navigationIcon="@drawable/ic_arrow_back" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Title & Status Header -->
+            <TextView
+                android:text="CIV-2026-00124 • Pending Review"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/civic_primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="Large pothole near school road"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/civic_navy"
+                android:layout_marginTop="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <!-- Photo & Geotag Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                style="@style/CardRounded12">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imgEvidence"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/img_pothole_evidence" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="📍 22.7231° N, 71.6375° E • Depth ~15cm"
+                        android:textColor="@color/civic_text_secondary"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 5-Stage Lifecycle Stepper -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Resolution Progress (Stage 3 of 6)"
+                android:textColor="@color/civic_navy"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                style="@style/CardRounded12">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <!-- Step 1: Submitted (Done) -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <ImageView android:layout_width="20dp" android:layout_height="20dp" android:src="@drawable/ic_check_circle_green" />
+                        <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_marginStart="8dp" android:text="1. Submitted" android:textStyle="bold" android:textColor="@color/civic_navy" android:layout_height="wrap_content"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="09:45 AM" android:textSize="11sp" android:textColor="@color/civic_text_secondary"/>
+                    </LinearLayout>
+
+                    <!-- Step 2: AI Triage (Done) -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal">
+                        <ImageView android:layout_width="20dp" android:layout_height="20dp" android:src="@drawable/ic_check_circle_green" />
+                        <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_marginStart="8dp" android:text="2. AI Analysis Completed" android:textStyle="bold" android:textColor="@color/civic_navy" android:layout_height="wrap_content"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="09:46 AM" android:textSize="11sp" android:textColor="@color/civic_text_secondary"/>
+                    </LinearLayout>
+
+                    <!-- Step 3: Pending Review (Current Active) -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:background="@color/status_in_progress_bg"
+                        android:padding="8dp"
+                        android:orientation="horizontal">
+                        <ImageView android:layout_width="20dp" android:layout_height="20dp" android:src="@drawable/ic_radio_active_blue" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:orientation="vertical">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="3. Under Government Review" android:textStyle="bold" android:textColor="@color/civic_primary"/>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Ticket sitting in intake queue. Expected response within 4 hours." android:textSize="11sp" android:textColor="@color/civic_text_secondary"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- Step 4: Assigned -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal">
+                        <ImageView android:layout_width="20dp" android:layout_height="20dp" android:src="@drawable/ic_circle_outline" />
+                        <TextView android:layout_width="match_parent" android:layout_marginStart="8dp" android:text="4. Assigned to Department" android:textColor="@color/civic_text_muted" android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                    <!-- Step 5: Resolved -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal">
+                        <ImageView android:layout_width="20dp" android:layout_height="20dp" android:src="@drawable/ic_circle_outline" />
+                        <TextView android:layout_width="match_parent" android:layout_marginStart="8dp" android:text="5. Verified Resolution" android:textColor="@color/civic_text_muted" android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>
+
