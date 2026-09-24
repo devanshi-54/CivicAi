@@ -96,6 +96,7 @@
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/tvSubmittedTitle"
                         android:text="Large pothole near school road"
                         android:textSize="15sp"
                         android:textStyle="bold"
@@ -105,6 +106,7 @@
                         android:layout_height="wrap_content" />
 
                     <TextView
+                        android:id="@+id/tvSubmittedLocation"
                         android:text="📍 Main Road, near St. Jude Public School"
                         android:textSize="13sp"
                         android:textColor="@color/civic_text_secondary"

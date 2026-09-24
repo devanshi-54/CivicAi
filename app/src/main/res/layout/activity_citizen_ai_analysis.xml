@@ -34,9 +34,19 @@
                 android:background="@drawable/bg_ai_badge"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="4dp"
-                android:text="✨ Automated Triaging Complete • 1.2s • v2.4 Model"
+                android:text="Demo triage preview • live AI service not connected"
                 android:textColor="@color/civic_ai_accent"
                 android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvAnalysisTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Complaint title"
+                android:textColor="@color/civic_navy"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <!-- Recommendation Alert Banner -->
@@ -58,7 +68,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="RECOMMENDED: HIGH PRIORITY"
+                        android:text="Priority will be assessed after submission"
                         android:textColor="@color/priority_high"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -67,7 +77,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:text="Model Diagnostic Confidence: 94.2%"
+                        android:text="This preview is not an official AI assessment."
                         android:textColor="@color/civic_text_secondary"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -94,7 +104,7 @@
                         android:orientation="vertical"
                         android:padding="12dp">
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Severity" android:textColor="@color/civic_text_secondary" android:textSize="12sp" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="High" android:textColor="@color/priority_high" android:textStyle="bold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Pending" android:textColor="@color/civic_primary" android:textStyle="bold" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
@@ -111,7 +121,7 @@
                         android:orientation="vertical"
                         android:padding="12dp">
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Urgency" android:textColor="@color/civic_text_secondary" android:textSize="12sp" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Immediate &lt;24h" android:textColor="@color/priority_high" android:textStyle="bold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Pending" android:textColor="@color/civic_primary" android:textStyle="bold" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
@@ -128,7 +138,7 @@
                         android:orientation="vertical"
                         android:padding="12dp">
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Safety Risk" android:textColor="@color/civic_text_secondary" android:textSize="12sp" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Critical" android:textColor="@color/priority_high" android:textStyle="bold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Pending" android:textColor="@color/civic_primary" android:textStyle="bold" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
@@ -145,7 +155,7 @@
                         android:orientation="vertical"
                         android:padding="12dp">
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Affected People" android:textColor="@color/civic_text_secondary" android:textSize="12sp" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="~1,500/day" android:textColor="@color/civic_navy" android:textStyle="bold" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Not estimated" android:textColor="@color/civic_navy" android:textStyle="bold" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
             </GridLayout>
@@ -174,7 +184,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Large road damage near a school crossing creates high risk of student pedestrian accidents and two-wheeler vehicular damage during morning rush."
+                        android:text="Your report will be reviewed by the responsible municipal team."
                         android:textColor="@color/civic_text_secondary"
                         android:textSize="13sp" />
                 </LinearLayout>

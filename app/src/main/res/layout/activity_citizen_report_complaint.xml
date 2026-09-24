@@ -72,7 +72,7 @@
                     android:id="@+id/etComplaintTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Large pothole near school road"
+                    android:hint="e.g. Pothole near school road"
                     android:textColor="@color/civic_navy" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -98,7 +98,7 @@
                     android:layout_height="100dp"
                     android:gravity="top"
                     android:inputType="textMultiLine"
-                    android:text="Large deep pothole on the primary approach road to the municipal secondary school. Vehicles swerving sharply into oncoming lane during morning peak hours."
+                    android:hint="Describe what happened and how it affects people"
                     android:textColor="@color/civic_navy" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -177,19 +177,43 @@
                     android:padding="12dp">
 
                     <TextView
+                        android:id="@+id/tvSelectedLocation"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="📍 Main Road, Surendranagar"
+                        android:text="No location selected"
                         android:textColor="@color/civic_navy"
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tvSelectedCoordinates"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:text="Lat: 22.7231° N, Long: 71.6375° E • Ward 4 (Accuracy ±4m)"
+                        android:text="Add an address or use current location"
                         android:textColor="@color/civic_text_secondary"
                         android:textSize="12sp" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etLocationAddress"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Street, landmark, or area"
+                            android:inputType="textCapSentences" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnGetLocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Use Current Location"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -207,11 +231,21 @@
                     android:padding="14dp">
 
                     <TextView
+                        android:id="@+id/tvPhotoCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Evidence Photos (1 attached)"
+                        android:text="No evidence photo attached"
                         android:textColor="@color/civic_navy"
                         android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/imgSelectedEvidence"
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp"
+                        android:layout_marginTop="8dp"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="Selected complaint evidence photo"
+                        android:visibility="gone" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
