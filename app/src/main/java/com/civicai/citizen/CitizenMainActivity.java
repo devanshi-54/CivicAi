@@ -31,9 +31,13 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
+
 import com.civicai.R;
 import com.civicai.model.Complaint;
 import com.civicai.model.ComplaintStatus;
+import com.civicai.repository.ComplaintRepository;
+import com.civicai.repository.RepositoryCallback;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.Priority;
 import com.google.android.gms.tasks.CancellationTokenSource;
@@ -431,6 +435,19 @@ public class CitizenMainActivity extends AppCompatActivity {
         CitizenComplaintStore.clearDraft(this);
         currentComplaintId = complaint.getComplaintId();
         showScreen(R.layout.activity_citizen_complaint_submitted, true);
+
+        // Submit to repository (Firestore + memoryCache) without blocking local-first UX
+        ComplaintRepository.getInstance().submitComplaint(complaint, new RepositoryCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                Log.d("CitizenMainActivity", "Complaint synced to Firestore: " + result);
+            }
+
+            @Override
+            public void onError(Exception exception) {
+                Log.w("CitizenMainActivity", "Firestore sync failed, local copy preserved: " + exception.getMessage());
+            }
+        });
     }
 
     private String createTicketId() {
@@ -470,6 +487,26 @@ public class CitizenMainActivity extends AppCompatActivity {
         }
         currentComplaintId = complaintId;
         open(R.layout.activity_citizen_complaint_details);
+
+        // Phase 4: Retrieve latest version from Firestore via ComplaintRepository
+        ComplaintRepository.getInstance().getComplaintById(complaintId, new RepositoryCallback<Complaint>() {
+            @Override
+            public void onSuccess(Complaint remoteComplaint) {
+                if (remoteComplaint != null) {
+                    CitizenComplaintStore.saveComplaint(CitizenMainActivity.this, remoteComplaint);
+                    if (!isFinishing() && !isDestroyed()
+                            && currentScreen == R.layout.activity_citizen_complaint_details
+                            && complaintId.equals(currentComplaintId)) {
+                        bindComplaintDetails();
+                    }
+                }
+            }
+
+            @Override
+            public void onError(Exception exception) {
+                Log.w("CitizenMainActivity", "Using local complaint cache; remote fetch failed: " + exception.getMessage());
+            }
+        });
     }
 
     private void bindComplaintDetails() {
@@ -479,7 +516,16 @@ public class CitizenMainActivity extends AppCompatActivity {
         ComplaintStatus status = complaint.getStatus() == null ? ComplaintStatus.SUBMITTED : complaint.getStatus();
         text(root, R.id.tvDetailTicket, complaint.getComplaintId() + " • " + status.getDisplayName());
         text(root, R.id.tvDetailTitle, complaint.getTitle());
-        text(root, R.id.tvDetailLocation, "📍 " + complaint.getLocationAddress());
+
+        String locationDetails = "📍 " + complaint.getLocationAddress();
+        if (!TextUtils.isEmpty(complaint.getAssignedDepartment())) {
+            locationDetails += "\nDept: " + complaint.getAssignedDepartment();
+        }
+        if (!TextUtils.isEmpty(complaint.getOfficialDecision())) {
+            locationDetails += "\nOfficial Decision: " + complaint.getOfficialDecision();
+        }
+        text(root, R.id.tvDetailLocation, locationDetails);
+
         ImageView image = findViewById(R.id.imgEvidence);
         if (image != null && !TextUtils.isEmpty(complaint.getImageUrl())) image.setImageURI(Uri.parse(complaint.getImageUrl()));
         TextView progress = findViewById(R.id.tvProgressTitle);

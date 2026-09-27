@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_gov_priority_queue_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background_light">
+
+    <!-- Navigation Header -->
+    <LinearLayout
+        android:id="@+id/pq_nav_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/card_surface"
+        android:gravity="center_vertical"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_pq_back"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="Back"
+            android:textSize="12sp"
+            android:textColor="@color/primary_text"
+            app:icon="@drawable/ic_arrow_back"
+            app:iconSize="16dp"
+            app:iconTint="@color/primary_text"
+            android:paddingStart="8dp"
+            android:paddingEnd="12dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Priority Queue"
+            android:textColor="@color/primary_text"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:paddingStart="6dp"
+            android:paddingEnd="6dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_pq_home"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="Home"
+            android:textSize="12sp"
+            android:textColor="@color/primary_text"
+            app:icon="@drawable/ic_home"
+            app:iconSize="16dp"
+            app:iconTint="@color/primary_text"
+            android:paddingStart="8dp"
+            android:paddingEnd="12dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/border_color" />
+
+    <!-- Filter/Sort bar -->
+    <LinearLayout
+        android:id="@+id/pq_filter_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/card_surface"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/pq_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Priority Queue"
+            android:textColor="@color/primary_text"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/pq_filter_toggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:singleSelection="true"
+            app:selectionRequired="true">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_filter_all"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="All"
+                android:textSize="12sp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_filter_high"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="High"
+                android:textSize="12sp"
+                android:textColor="@color/high_priority"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp" />
+
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+    </LinearLayout>
+
+    <!-- Count label -->
+    <TextView
+        android:id="@+id/pq_count_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Loading…"
+        android:textColor="@color/secondary_text"
+        android:textSize="12sp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="4dp" />
+
+    <!-- RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/pq_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="16dp" />
+
+    <!-- Empty state -->
+    <LinearLayout
+        android:id="@+id/pq_empty_state"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/ic_list"
+            android:contentDescription="No complaints"
+            app:tint="@color/gray_300" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No complaints in queue"
+            android:textColor="@color/secondary_text"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Complaints will appear here when submitted"
+            android:textColor="@color/gray_500"
+            android:textSize="13sp"
+            android:layout_marginTop="6dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

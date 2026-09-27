@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_government"
+    app:startDestination="@id/govDashboardFragment">
+
+    <fragment
+        android:id="@+id/govDashboardFragment"
+        android:name="com.civicai.government.GovDashboardFragment"
+        android:label="Dashboard"
+        tools:layout="@layout/fragment_gov_dashboard">
+        <action
+            android:id="@+id/action_dashboard_to_priorityQueue"
+            app:destination="@id/govPriorityQueueFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/govPriorityQueueFragment"
+        android:name="com.civicai.government.GovPriorityQueueFragment"
+        android:label="Priority Queue"
+        tools:layout="@layout/fragment_gov_priority_queue">
+        <action
+            android:id="@+id/action_priorityQueue_to_complaintDetails"
+            app:destination="@id/govComplaintDetailsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+        <argument
+            android:name="complaintId"
+            app:argType="string"
+            android:defaultValue="" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/govComplaintDetailsFragment"
+        android:name="com.civicai.government.GovComplaintDetailsFragment"
+        android:label="Complaint Details"
+        tools:layout="@layout/fragment_gov_complaint_details">
+        <argument
+            android:name="complaintId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_complaintDetails_to_decision"
+            app:destination="@id/govDecisionFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/govDecisionFragment"
+        android:name="com.civicai.government.GovDecisionFragment"
+        android:label="Official Decision"
+        tools:layout="@layout/fragment_gov_decision">
+        <argument
+            android:name="complaintId"
+            app:argType="string" />
+    </fragment>
+
+</navigation>

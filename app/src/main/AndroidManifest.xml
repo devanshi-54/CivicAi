@@ -24,5 +24,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".government.GovMainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.CivicAI"
+            android:label="@string/role_government" />
     </application>
 </manifest>

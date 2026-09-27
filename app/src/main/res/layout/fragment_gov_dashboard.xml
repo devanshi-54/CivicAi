@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_gov_dashboard_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_light"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Header -->
+        <LinearLayout
+            android:id="@+id/dashboard_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/dark_navy"
+            android:padding="20dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:id="@+id/dashboard_greeting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Good day, Officer"
+                android:textColor="#B0BEC5"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/dashboard_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Civic Complaints Dashboard"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginTop="4dp" />
+
+            <TextView
+                android:id="@+id/dashboard_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AI-assisted complaint triage and management"
+                android:textColor="#90CAF9"
+                android:textSize="12sp"
+                android:layout_marginTop="2dp" />
+
+        </LinearLayout>
+
+        <!-- Stats Row 1 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
+
+            <!-- Total Complaints -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_total"
+                style="@style/CivicAi.Card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+                    <TextView
+                        android:id="@+id/stat_total_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TOTAL"
+                        android:textColor="@color/secondary_text"
+                        android:textSize="11sp"
+                        android:letterSpacing="0.08" />
+                    <TextView
+                        android:id="@+id/stat_total_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="—"
+                        android:textColor="@color/primary_text"
+                        android:textSize="32sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="4dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Complaints"
+                        android:textColor="@color/secondary_text"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- High Priority -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_high_priority"
+                style="@style/CivicAi.Card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"
+                app:cardBackgroundColor="@color/high_priority_bg"
+                app:strokeColor="@color/high_priority">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+                    <TextView
+                        android:id="@+id/stat_high_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="HIGH PRIORITY"
+                        android:textColor="@color/high_priority"
+                        android:textSize="11sp"
+                        android:letterSpacing="0.08" />
+                    <TextView
+                        android:id="@+id/stat_high_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="—"
+                        android:textColor="@color/high_priority"
+                        android:textSize="32sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="4dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Need Attention"
+                        android:textColor="@color/high_priority"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+        <!-- Stats Row 2 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+
+            <!-- Pending -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_pending"
+                style="@style/CivicAi.Card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                app:cardBackgroundColor="@color/medium_priority_bg"
+                app:strokeColor="@color/medium_priority">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+                    <TextView
+                        android:id="@+id/stat_pending_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="PENDING"
+                        android:textColor="@color/medium_priority"
+                        android:textSize="11sp"
+                        android:letterSpacing="0.08" />
+                    <TextView
+                        android:id="@+id/stat_pending_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="—"
+                        android:textColor="@color/medium_priority"
+                        android:textSize="32sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="4dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Under Review"
+                        android:textColor="@color/medium_priority"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Resolved -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_resolved"
+                style="@style/CivicAi.Card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"
+                app:cardBackgroundColor="@color/success_bg"
+                app:strokeColor="@color/success_color">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+                    <TextView
+                        android:id="@+id/stat_resolved_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="RESOLVED"
+                        android:textColor="@color/success_color"
+                        android:textSize="11sp"
+                        android:letterSpacing="0.08" />
+                    <TextView
+                        android:id="@+id/stat_resolved_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="—"
+                        android:textColor="@color/success_color"
+                        android:textSize="32sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="4dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Completed"
+                        android:textColor="@color/success_color"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+        <!-- Priority Queue CTA -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_open_priority_queue"
+            style="@style/CivicAi.Card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/primary_blue"
+            app:strokeWidth="0dp"
+            android:clickable="true"
+            android:focusable="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="18dp"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/ic_priority"
+                    android:contentDescription="Priority queue"
+                    app:tint="@color/white" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="14dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Open Priority Queue"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="View and triage all complaints by severity"
+                        android:textColor="#CCE3FF"
+                        android:textSize="12sp"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_arrow_back"
+                    android:contentDescription="Navigate"
+                    android:rotation="180"
+                    app:tint="@color/white" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Recent Complaints Section -->
+        <TextView
+            android:id="@+id/section_recent_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recent Complaints"
+            android:textColor="@color/primary_text"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp" />
+
+        <LinearLayout
+            android:id="@+id/recent_complaints_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <TextView
+            android:id="@+id/dashboard_empty_state"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No complaints available."
+            android:textColor="@color/secondary_text"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:padding="24dp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+</ScrollView>
