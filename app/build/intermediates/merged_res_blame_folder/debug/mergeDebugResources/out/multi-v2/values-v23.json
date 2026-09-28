@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.civicai.app-mergeDebugResources-2:/values-v23/values-v23.xml",
+            "outputFile": "com.civicai.app-mergeDebugResources-3:/values-v23/values-v23.xml",
             "map": [
                 {
                     "source": "C:\\Users\\devan\\.gradle\\caches\\8.13\\transforms\\e183dc790062f3148c62ee88991018fa\\transformed\\cardview-1.0.0\\res\\values-v23\\values-v23.xml",

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.civicai.app-mergeDebugResources-2:/values-v21/values-v21.xml",
+            "outputFile": "com.civicai.app-mergeDebugResources-3:/values-v21/values-v21.xml",
             "map": [
                 {
                     "source": "C:\\Users\\devan\\.gradle\\caches\\8.13\\transforms\\c470c77aa3f9dddbd43c8ae30adc14db\\transformed\\credentials-play-services-auth-1.2.0-rc01\\res\\values-v21\\values-v21.xml",
@@ -42,7 +42,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\devan\\.gradle\\caches\\8.13\\transforms\\1eb2a5e747fcc9b872ad66bc603888ef\\transformed\\core-1.13.0\\res\\values-v21\\values-v21.xml",
+                    "source": "C:\\Users\\devan\\.gradle\\caches\\8.13\\transforms\\df43c04c1aeee258af7ac1723e8f580d\\transformed\\core-1.13.1\\res\\values-v21\\values-v21.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,13",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",

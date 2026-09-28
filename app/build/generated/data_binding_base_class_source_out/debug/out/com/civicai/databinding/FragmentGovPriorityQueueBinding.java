@@ -5,12 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.civicai.R;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.button.MaterialButtonToggleGroup;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
@@ -20,12 +23,61 @@ public final class FragmentGovPriorityQueueBinding implements ViewBinding {
   private final LinearLayout rootView;
 
   @NonNull
-  public final RecyclerView rvPriorityQueue;
+  public final MaterialButton btnFilterAll;
+
+  @NonNull
+  public final MaterialButton btnFilterHigh;
+
+  @NonNull
+  public final MaterialButton btnPqBack;
+
+  @NonNull
+  public final MaterialButton btnPqHome;
+
+  @NonNull
+  public final LinearLayout fragmentGovPriorityQueueRoot;
+
+  @NonNull
+  public final TextView pqCountLabel;
+
+  @NonNull
+  public final LinearLayout pqEmptyState;
+
+  @NonNull
+  public final LinearLayout pqFilterBar;
+
+  @NonNull
+  public final MaterialButtonToggleGroup pqFilterToggle;
+
+  @NonNull
+  public final LinearLayout pqNavHeader;
+
+  @NonNull
+  public final RecyclerView pqRecyclerView;
+
+  @NonNull
+  public final TextView pqTitle;
 
   private FragmentGovPriorityQueueBinding(@NonNull LinearLayout rootView,
-      @NonNull RecyclerView rvPriorityQueue) {
+      @NonNull MaterialButton btnFilterAll, @NonNull MaterialButton btnFilterHigh,
+      @NonNull MaterialButton btnPqBack, @NonNull MaterialButton btnPqHome,
+      @NonNull LinearLayout fragmentGovPriorityQueueRoot, @NonNull TextView pqCountLabel,
+      @NonNull LinearLayout pqEmptyState, @NonNull LinearLayout pqFilterBar,
+      @NonNull MaterialButtonToggleGroup pqFilterToggle, @NonNull LinearLayout pqNavHeader,
+      @NonNull RecyclerView pqRecyclerView, @NonNull TextView pqTitle) {
     this.rootView = rootView;
-    this.rvPriorityQueue = rvPriorityQueue;
+    this.btnFilterAll = btnFilterAll;
+    this.btnFilterHigh = btnFilterHigh;
+    this.btnPqBack = btnPqBack;
+    this.btnPqHome = btnPqHome;
+    this.fragmentGovPriorityQueueRoot = fragmentGovPriorityQueueRoot;
+    this.pqCountLabel = pqCountLabel;
+    this.pqEmptyState = pqEmptyState;
+    this.pqFilterBar = pqFilterBar;
+    this.pqFilterToggle = pqFilterToggle;
+    this.pqNavHeader = pqNavHeader;
+    this.pqRecyclerView = pqRecyclerView;
+    this.pqTitle = pqTitle;
   }
 
   @Override
@@ -55,13 +107,77 @@ public final class FragmentGovPriorityQueueBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.rvPriorityQueue;
-      RecyclerView rvPriorityQueue = ViewBindings.findChildViewById(rootView, id);
-      if (rvPriorityQueue == null) {
+      id = R.id.btn_filter_all;
+      MaterialButton btnFilterAll = ViewBindings.findChildViewById(rootView, id);
+      if (btnFilterAll == null) {
         break missingId;
       }
 
-      return new FragmentGovPriorityQueueBinding((LinearLayout) rootView, rvPriorityQueue);
+      id = R.id.btn_filter_high;
+      MaterialButton btnFilterHigh = ViewBindings.findChildViewById(rootView, id);
+      if (btnFilterHigh == null) {
+        break missingId;
+      }
+
+      id = R.id.btn_pq_back;
+      MaterialButton btnPqBack = ViewBindings.findChildViewById(rootView, id);
+      if (btnPqBack == null) {
+        break missingId;
+      }
+
+      id = R.id.btn_pq_home;
+      MaterialButton btnPqHome = ViewBindings.findChildViewById(rootView, id);
+      if (btnPqHome == null) {
+        break missingId;
+      }
+
+      LinearLayout fragmentGovPriorityQueueRoot = (LinearLayout) rootView;
+
+      id = R.id.pq_count_label;
+      TextView pqCountLabel = ViewBindings.findChildViewById(rootView, id);
+      if (pqCountLabel == null) {
+        break missingId;
+      }
+
+      id = R.id.pq_empty_state;
+      LinearLayout pqEmptyState = ViewBindings.findChildViewById(rootView, id);
+      if (pqEmptyState == null) {
+        break missingId;
+      }
+
+      id = R.id.pq_filter_bar;
+      LinearLayout pqFilterBar = ViewBindings.findChildViewById(rootView, id);
+      if (pqFilterBar == null) {
+        break missingId;
+      }
+
+      id = R.id.pq_filter_toggle;
+      MaterialButtonToggleGroup pqFilterToggle = ViewBindings.findChildViewById(rootView, id);
+      if (pqFilterToggle == null) {
+        break missingId;
+      }
+
+      id = R.id.pq_nav_header;
+      LinearLayout pqNavHeader = ViewBindings.findChildViewById(rootView, id);
+      if (pqNavHeader == null) {
+        break missingId;
+      }
+
+      id = R.id.pq_recycler_view;
+      RecyclerView pqRecyclerView = ViewBindings.findChildViewById(rootView, id);
+      if (pqRecyclerView == null) {
+        break missingId;
+      }
+
+      id = R.id.pq_title;
+      TextView pqTitle = ViewBindings.findChildViewById(rootView, id);
+      if (pqTitle == null) {
+        break missingId;
+      }
+
+      return new FragmentGovPriorityQueueBinding((LinearLayout) rootView, btnFilterAll,
+          btnFilterHigh, btnPqBack, btnPqHome, fragmentGovPriorityQueueRoot, pqCountLabel,
+          pqEmptyState, pqFilterBar, pqFilterToggle, pqNavHeader, pqRecyclerView, pqTitle);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

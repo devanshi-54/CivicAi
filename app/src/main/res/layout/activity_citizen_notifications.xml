@@ -52,21 +52,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
-                    android:text="All (5)"
+                    android:text="All"
                     style="@style/Widget.MaterialComponents.Chip.Choice" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipComplaints"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Complaints (3)"
+                    android:text="Complaints"
                     style="@style/Widget.MaterialComponents.Chip.Choice" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipAlerts"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Important (1)"
+                    android:text="Important"
                     style="@style/Widget.MaterialComponents.Chip.Choice" />
             </com.google.android.material.chip.ChipGroup>
         </HorizontalScrollView>

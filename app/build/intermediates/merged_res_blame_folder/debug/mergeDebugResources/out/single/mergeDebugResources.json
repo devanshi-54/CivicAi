@@ -1,134 +1,234 @@
 [
     {
-        "merged": "com.civicai.app-debug-4:/layout_fragment_citizen_my_complaints.xml.flat",
-        "source": "com.civicai.app-main-6:/layout/fragment_citizen_my_complaints.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\drawable_bg_card_bordered.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\drawable\\bg_card_bordered.xml"
     },
     {
-        "merged": "com.civicai.app-debug-4:/drawable_ic_profile.xml.flat",
-        "source": "com.civicai.app-main-6:/drawable/ic_profile.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\layout_fragment_gov_priority_queue.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\fragment_gov_priority_queue.xml"
     },
     {
-        "merged": "com.civicai.app-debug-4:/drawable_ic_priority.xml.flat",
-        "source": "com.civicai.app-main-6:/drawable/ic_priority.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\navigation_nav_government.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\navigation\\nav_government.xml"
     },
     {
-        "merged": "com.civicai.app-debug-4:/navigation_nav_citizen.xml.flat",
-        "source": "com.civicai.app-main-6:/navigation/nav_citizen.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\layout_activity_citizen_onboarding_1.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\activity_citizen_onboarding_1.xml"
     },
     {
-        "merged": "com.civicai.app-debug-4:/drawable_ic_ai_sparkle.xml.flat",
-        "source": "com.civicai.app-main-6:/drawable/ic_ai_sparkle.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\layout_fragment_gov_decision.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\fragment_gov_decision.xml"
     },
     {
-        "merged": "com.civicai.app-debug-4:/layout_fragment_gov_analytics.xml.flat",
-        "source": "com.civicai.app-main-6:/layout/fragment_gov_analytics.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\drawable_ic_profile.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\drawable\\ic_profile.xml"
     },
     {
-        "merged": "com.civicai.app-debug-4:/drawable_ic_analytics.xml.flat",
-        "source": "com.civicai.app-main-6:/drawable/ic_analytics.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\layout_activity_citizen_complaint_submitted.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\activity_citizen_complaint_submitted.xml"
     },
     {
-        "merged": "com.civicai.app-debug-4:/drawable_bg_badge_ai.xml.flat",
-        "source": "com.civicai.app-main-6:/drawable/bg_badge_ai.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\drawable_img_pothole_evidence.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\drawable\\img_pothole_evidence.xml"
     },
     {
-        "merged": "com.civicai.app-debug-4:/layout_fragment_gov_issue_clusters.xml.flat",
-        "source": "com.civicai.app-main-6:/layout/fragment_gov_issue_clusters.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\layout_activity_gov_main.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\activity_gov_main.xml"
     },
     {
-        "merged": "com.civicai.app-debug-4:/menu_gov_bottom_nav.xml.flat",
-        "source": "com.civicai.app-main-6:/menu/gov_bottom_nav.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\drawable_ic_check_all.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\drawable\\ic_check_all.xml"
     },
     {
-        "merged": "com.civicai.app-debug-4:/drawable_ic_cluster.xml.flat",
-        "source": "com.civicai.app-main-6:/drawable/ic_cluster.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\drawable-nodpi_onboarding_photo_2.jpg.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\drawable-nodpi\\onboarding_photo_2.jpg"
     },
     {
-        "merged": "com.civicai.app-debug-4:/layout_activity_gov_main.xml.flat",
-        "source": "com.civicai.app-main-6:/layout/activity_gov_main.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\drawable_ic_map.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\drawable\\ic_map.xml"
     },
     {
-        "merged": "com.civicai.app-debug-4:/drawable_ic_list.xml.flat",
-        "source": "com.civicai.app-main-6:/drawable/ic_list.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\layout_item_gov_complaint_card.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\item_gov_complaint_card.xml"
     },
     {
-        "merged": "com.civicai.app-debug-4:/drawable_ic_map.xml.flat",
-        "source": "com.civicai.app-main-6:/drawable/ic_map.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\drawable_ic_arrow_back.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\drawable\\ic_arrow_back.xml"
     },
     {
-        "merged": "com.civicai.app-debug-4:/layout_activity_main.xml.flat",
-        "source": "com.civicai.app-main-6:/layout/activity_main.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\drawable_ic_circle_outline.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\drawable\\ic_circle_outline.xml"
     },
     {
-        "merged": "com.civicai.app-debug-4:/layout_fragment_citizen_profile.xml.flat",
-        "source": "com.civicai.app-main-6:/layout/fragment_citizen_profile.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\drawable_bg_badge_ai.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\drawable\\bg_badge_ai.xml"
     },
     {
-        "merged": "com.civicai.app-debug-4:/layout_fragment_gov_priority_queue.xml.flat",
-        "source": "com.civicai.app-main-6:/layout/fragment_gov_priority_queue.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\layout_fragment_gov_complaint_details.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\fragment_gov_complaint_details.xml"
     },
     {
-        "merged": "com.civicai.app-debug-4:/drawable_ic_notifications.xml.flat",
-        "source": "com.civicai.app-main-6:/drawable/ic_notifications.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\layout_activity_citizen_profile_settings.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\activity_citizen_profile_settings.xml"
     },
     {
-        "merged": "com.civicai.app-debug-4:/layout_fragment_citizen_report.xml.flat",
-        "source": "com.civicai.app-main-6:/layout/fragment_citizen_report.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\drawable_illustration_onboarding_3.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\drawable\\illustration_onboarding_3.xml"
     },
     {
-        "merged": "com.civicai.app-debug-4:/drawable_ic_dashboard.xml.flat",
-        "source": "com.civicai.app-main-6:/drawable/ic_dashboard.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\drawable_ic_check_circle_green.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\drawable\\ic_check_circle_green.xml"
     },
     {
-        "merged": "com.civicai.app-debug-4:/layout_fragment_citizen_home.xml.flat",
-        "source": "com.civicai.app-main-6:/layout/fragment_citizen_home.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\drawable_ic_radio_active_blue.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\drawable\\ic_radio_active_blue.xml"
     },
     {
-        "merged": "com.civicai.app-debug-4:/layout_activity_citizen_main.xml.flat",
-        "source": "com.civicai.app-main-6:/layout/activity_citizen_main.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\drawable-nodpi_onboarding_photo_3.jpg.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\drawable-nodpi\\onboarding_photo_3.jpg"
     },
     {
-        "merged": "com.civicai.app-debug-4:/navigation_nav_government.xml.flat",
-        "source": "com.civicai.app-main-6:/navigation/nav_government.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\layout_activity_citizen_onboarding_2.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\activity_citizen_onboarding_2.xml"
     },
     {
-        "merged": "com.civicai.app-debug-4:/drawable_ic_report.xml.flat",
-        "source": "com.civicai.app-main-6:/drawable/ic_report.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\layout_activity_citizen_my_complaints.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\activity_citizen_my_complaints.xml"
     },
     {
-        "merged": "com.civicai.app-debug-4:/drawable_bg_card_bordered.xml.flat",
-        "source": "com.civicai.app-main-6:/drawable/bg_card_bordered.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\layout_fragment_gov_dashboard.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\fragment_gov_dashboard.xml"
     },
     {
-        "merged": "com.civicai.app-debug-4:/drawable_bg_badge_high_priority.xml.flat",
-        "source": "com.civicai.app-main-6:/drawable/bg_badge_high_priority.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\drawable_ic_image.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\drawable\\ic_image.xml"
     },
     {
-        "merged": "com.civicai.app-debug-4:/menu_citizen_bottom_nav.xml.flat",
-        "source": "com.civicai.app-main-6:/menu/citizen_bottom_nav.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\drawable_ic_camera.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\drawable\\ic_camera.xml"
     },
     {
-        "merged": "com.civicai.app-debug-4:/layout_fragment_gov_complaint_map.xml.flat",
-        "source": "com.civicai.app-main-6:/layout/fragment_gov_complaint_map.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\layout_activity_citizen_report_complaint.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\activity_citizen_report_complaint.xml"
     },
     {
-        "merged": "com.civicai.app-debug-4:/drawable_ic_home.xml.flat",
-        "source": "com.civicai.app-main-6:/drawable/ic_home.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\drawable_ic_check_circle_large.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\drawable\\ic_check_circle_large.xml"
     },
     {
-        "merged": "com.civicai.app-debug-4:/drawable_bg_badge_low_priority.xml.flat",
-        "source": "com.civicai.app-main-6:/drawable/bg_badge_low_priority.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\drawable_ic_report.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\drawable\\ic_report.xml"
     },
     {
-        "merged": "com.civicai.app-debug-4:/layout_fragment_citizen_notifications.xml.flat",
-        "source": "com.civicai.app-main-6:/layout/fragment_citizen_notifications.xml"
+        "merged": "com.civicai.app-debug-5:/layout_activity_citizen_complaint_details.xml.flat",
+        "source": "com.civicai.app-main-7:/layout/activity_citizen_complaint_details.xml"
     },
     {
-        "merged": "com.civicai.app-debug-4:/layout_fragment_gov_dashboard.xml.flat",
-        "source": "com.civicai.app-main-6:/layout/fragment_gov_dashboard.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\menu_citizen_bottom_nav_menu.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\menu\\citizen_bottom_nav_menu.xml"
     },
     {
-        "merged": "com.civicai.app-debug-4:/drawable_bg_badge_medium_priority.xml.flat",
-        "source": "com.civicai.app-main-6:/drawable/bg_badge_medium_priority.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\drawable_bg_badge_low_priority.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\drawable\\bg_badge_low_priority.xml"
+    },
+    {
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\drawable_ic_search.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\drawable\\ic_search.xml"
+    },
+    {
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\drawable_ic_analytics.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\drawable\\ic_analytics.xml"
+    },
+    {
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\drawable_illustration_onboarding_2.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\drawable\\illustration_onboarding_2.xml"
+    },
+    {
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\layout_activity_citizen_onboarding_3.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\activity_citizen_onboarding_3.xml"
+    },
+    {
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\layout_item_citizen_notification_card.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\item_citizen_notification_card.xml"
+    },
+    {
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\drawable_ic_priority.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\drawable\\ic_priority.xml"
+    },
+    {
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\layout_activity_citizen_notification_details.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\activity_citizen_notification_details.xml"
+    },
+    {
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\layout_activity_citizen_complaint_details.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\activity_citizen_complaint_details.xml"
+    },
+    {
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\drawable_ic_cluster.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\drawable\\ic_cluster.xml"
+    },
+    {
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\layout_activity_citizen_ai_analysis.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\activity_citizen_ai_analysis.xml"
+    },
+    {
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\drawable_ic_close.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\drawable\\ic_close.xml"
+    },
+    {
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\layout_item_citizen_complaint_card.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\item_citizen_complaint_card.xml"
+    },
+    {
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\drawable_ic_ai_sparkle.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\drawable\\ic_ai_sparkle.xml"
+    },
+    {
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\drawable_illustration_onboarding_1.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\drawable\\illustration_onboarding_1.xml"
+    },
+    {
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\drawable_bg_badge_medium_priority.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\drawable\\bg_badge_medium_priority.xml"
+    },
+    {
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\drawable_ic_list.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\drawable\\ic_list.xml"
+    },
+    {
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\drawable_ic_notifications.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\drawable\\ic_notifications.xml"
+    },
+    {
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\drawable_ic_verified_badge.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\drawable\\ic_verified_badge.xml"
+    },
+    {
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\drawable_ic_dashboard.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\drawable\\ic_dashboard.xml"
+    },
+    {
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\drawable-nodpi_onboarding_photo_1.jpg.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\drawable-nodpi\\onboarding_photo_1.jpg"
+    },
+    {
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\drawable_bg_badge_high_priority.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\drawable\\bg_badge_high_priority.xml"
+    },
+    {
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\layout_activity_citizen_notifications.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\activity_citizen_notifications.xml"
+    },
+    {
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\drawable_bg_ai_badge.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\drawable\\bg_ai_badge.xml"
+    },
+    {
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\drawable_ic_home.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\drawable\\ic_home.xml"
+    },
+    {
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-debug-5:\\layout_activity_citizen_home.xml.flat",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\activity_citizen_home.xml"
     }
 ]

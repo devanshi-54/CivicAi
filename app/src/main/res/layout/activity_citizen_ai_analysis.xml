@@ -34,7 +34,8 @@
                 android:background="@drawable/bg_ai_badge"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="4dp"
-                android:text="Demo triage preview • live AI service not connected"
+                android:id="@+id/tvAiStatus"
+                android:text="Gemini AI triage is loading…"
                 android:textColor="@color/civic_ai_accent"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -68,7 +69,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Priority will be assessed after submission"
+                        android:id="@+id/tvAiPriority"
+                        android:text="AI priority is being assessed…"
                         android:textColor="@color/priority_high"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -77,7 +79,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:text="This preview is not an official AI assessment."
+                        android:text="AI output is advisory; government officials make assignment decisions."
                         android:textColor="@color/civic_text_secondary"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -104,7 +106,7 @@
                         android:orientation="vertical"
                         android:padding="12dp">
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Severity" android:textColor="@color/civic_text_secondary" android:textSize="12sp" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Pending" android:textColor="@color/civic_primary" android:textStyle="bold" />
+                        <TextView android:id="@+id/tvAiSeverity" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Pending" android:textColor="@color/civic_primary" android:textStyle="bold" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
@@ -121,7 +123,7 @@
                         android:orientation="vertical"
                         android:padding="12dp">
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Urgency" android:textColor="@color/civic_text_secondary" android:textSize="12sp" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Pending" android:textColor="@color/civic_primary" android:textStyle="bold" />
+                        <TextView android:id="@+id/tvAiUrgency" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Pending" android:textColor="@color/civic_primary" android:textStyle="bold" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
@@ -138,7 +140,7 @@
                         android:orientation="vertical"
                         android:padding="12dp">
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Safety Risk" android:textColor="@color/civic_text_secondary" android:textSize="12sp" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Pending" android:textColor="@color/civic_primary" android:textStyle="bold" />
+                        <TextView android:id="@+id/tvAiSafetyRisk" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Pending" android:textColor="@color/civic_primary" android:textStyle="bold" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
@@ -155,7 +157,7 @@
                         android:orientation="vertical"
                         android:padding="12dp">
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Affected People" android:textColor="@color/civic_text_secondary" android:textSize="12sp" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Not estimated" android:textColor="@color/civic_navy" android:textStyle="bold" />
+                        <TextView android:id="@+id/tvAiAffectedPeople" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Not estimated" android:textColor="@color/civic_navy" android:textStyle="bold" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
             </GridLayout>
@@ -181,12 +183,46 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tvAiReason"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Your report will be reviewed by the responsible municipal team."
+                        android:text="Waiting for AI triage result."
                         android:textColor="@color/civic_text_secondary"
                         android:textSize="13sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                style="@style/CardRounded12">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Suggested municipal routing"
+                        android:textColor="@color/civic_navy"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/tvAiDepartment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="Department pending"
+                        android:textColor="@color/civic_primary" />
+                    <TextView
+                        android:id="@+id/tvAiAction"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Action pending"
+                        android:textColor="@color/civic_text_secondary" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -222,7 +258,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/civic_primary"
-            android:text="Submit Complaint" />
+            android:enabled="false"
+            android:text="Analyzing…" />
     </LinearLayout>
 </LinearLayout>
 

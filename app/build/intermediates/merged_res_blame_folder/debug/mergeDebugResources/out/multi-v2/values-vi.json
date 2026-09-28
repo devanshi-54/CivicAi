@@ -1,25 +1,8 @@
 {
     "logs": [
         {
-            "outputFile": "com.civicai.app-mergeDebugResources-2:/values-vi/values-vi.xml",
+            "outputFile": "com.civicai.app-mergeDebugResources-3:/values-vi/values-vi.xml",
             "map": [
-                {
-                    "source": "C:\\Users\\devan\\.gradle\\caches\\8.13\\transforms\\de6ed37d17ff68626c72adb5835c7b5b\\transformed\\play-services-base-18.5.0\\res\\values-vi\\values.xml",
-                    "from": {
-                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
-                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
-                        "startOffsets": "193,291,449,570,675,836,962,1077,1177,1346,1449,1602,1728,1883,2028,2092,2152",
-                        "endColumns": "97,157,120,104,160,125,114,99,168,102,152,125,154,144,63,59,78",
-                        "endOffsets": "290,448,569,674,835,961,1076,1176,1345,1448,1601,1727,1882,2027,2091,2151,2230"
-                    },
-                    "to": {
-                        "startLines": "50,51,52,53,54,55,56,57,59,60,61,62,63,64,65,66,67",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "4657,4759,4921,5046,5155,5320,5450,5569,5801,5974,6081,6238,6368,6527,6676,6744,6808",
-                        "endColumns": "101,161,124,108,164,129,118,103,172,106,156,129,158,148,67,63,82",
-                        "endOffsets": "4754,4916,5041,5150,5315,5445,5564,5668,5969,6076,6233,6363,6522,6671,6739,6803,6886"
-                    }
-                },
                 {
                     "source": "C:\\Users\\devan\\.gradle\\caches\\8.13\\transforms\\8766604475c479296a5b27177db7e74d\\transformed\\navigation-ui-2.8.5\\res\\values-vi\\values-vi.xml",
                     "from": {
@@ -35,6 +18,23 @@
                         "startOffsets": "12250,12358",
                         "endColumns": "107,112",
                         "endOffsets": "12353,12466"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\devan\\.gradle\\caches\\8.13\\transforms\\df43c04c1aeee258af7ac1723e8f580d\\transformed\\core-1.13.1\\res\\values-vi\\values-vi.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,152,254,353,453,556,669,785",
+                        "endColumns": "96,101,98,99,102,112,115,100",
+                        "endOffsets": "147,249,348,448,551,664,780,881"
+                    },
+                    "to": {
+                        "startLines": "40,41,42,43,44,45,46,142",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "3634,3731,3833,3932,4032,4135,4248,12869",
+                        "endColumns": "96,101,98,99,102,112,115,100",
+                        "endOffsets": "3726,3828,3927,4027,4130,4243,4359,12965"
                     }
                 },
                 {
@@ -55,20 +55,20 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\devan\\.gradle\\caches\\8.13\\transforms\\1eb2a5e747fcc9b872ad66bc603888ef\\transformed\\core-1.13.0\\res\\values-vi\\values-vi.xml",
+                    "source": "C:\\Users\\devan\\.gradle\\caches\\8.13\\transforms\\5c96316e3f3e4e53f83b18fe2aec3888\\transformed\\play-services-basement-18.9.0\\res\\values-vi\\values.xml",
                     "from": {
-                        "startLines": "2,3,4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,152,254,353,453,556,669,785",
-                        "endColumns": "96,101,98,99,102,112,115,100",
-                        "endOffsets": "147,249,348,448,551,664,780,881"
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "218",
+                        "endColumns": "123",
+                        "endOffsets": "341"
                     },
                     "to": {
-                        "startLines": "40,41,42,43,44,45,46,142",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "3634,3731,3833,3932,4032,4135,4248,12869",
-                        "endColumns": "96,101,98,99,102,112,115,100",
-                        "endOffsets": "3726,3828,3927,4027,4130,4243,4359,12965"
+                        "startLines": "58",
+                        "startColumns": "4",
+                        "startOffsets": "5673",
+                        "endColumns": "127",
+                        "endOffsets": "5796"
                     }
                 },
                 {
@@ -108,23 +108,6 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\devan\\.gradle\\caches\\8.13\\transforms\\564b333f7b5bdcad6fde55f759c3a6b4\\transformed\\play-services-basement-18.4.0\\res\\values-vi\\values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "195",
-                        "endColumns": "123",
-                        "endOffsets": "318"
-                    },
-                    "to": {
-                        "startLines": "58",
-                        "startColumns": "4",
-                        "startOffsets": "5673",
-                        "endColumns": "127",
-                        "endOffsets": "5796"
-                    }
-                },
-                {
                     "source": "C:\\Users\\devan\\.gradle\\caches\\8.13\\transforms\\d7e34661a92da67bd1c94e4b19f8dcda\\transformed\\credentials-1.2.0-rc01\\res\\values-vi\\values-vi.xml",
                     "from": {
                         "startLines": "2,3",
@@ -139,6 +122,23 @@
                         "startOffsets": "3008,3120",
                         "endColumns": "111,119",
                         "endOffsets": "3115,3235"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\devan\\.gradle\\caches\\8.13\\transforms\\e87b04996f2ed3009ceb0521dc010f8f\\transformed\\play-services-base-18.9.0\\res\\values-vi\\values.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
+                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+                        "startOffsets": "216,314,472,593,698,859,985,1100,1200,1369,1472,1625,1751,1906,2051,2115,2175",
+                        "endColumns": "97,157,120,104,160,125,114,99,168,102,152,125,154,144,63,59,78",
+                        "endOffsets": "313,471,592,697,858,984,1099,1199,1368,1471,1624,1750,1905,2050,2114,2174,2253"
+                    },
+                    "to": {
+                        "startLines": "50,51,52,53,54,55,56,57,59,60,61,62,63,64,65,66,67",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "4657,4759,4921,5046,5155,5320,5450,5569,5801,5974,6081,6238,6368,6527,6676,6744,6808",
+                        "endColumns": "101,161,124,108,164,129,118,103,172,106,156,129,158,148,67,63,82",
+                        "endOffsets": "4754,4916,5041,5150,5315,5445,5564,5668,5969,6076,6233,6363,6522,6671,6739,6803,6886"
                     }
                 }
             ]

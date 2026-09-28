@@ -4,44 +4,58 @@ package com.civicai.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentContainerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.civicai.R;
-import com.google.android.material.appbar.MaterialToolbar;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
 
 public final class ActivityGovMainBinding implements ViewBinding {
   @NonNull
-  private final CoordinatorLayout rootView;
+  private final ConstraintLayout rootView;
 
   @NonNull
-  public final BottomNavigationView govBottomNav;
+  public final ConstraintLayout activityGovMain;
+
+  @NonNull
+  public final TextView govAppTitle;
+
+  @NonNull
+  public final ImageView govLogo;
 
   @NonNull
   public final FragmentContainerView govNavHostFragment;
 
   @NonNull
-  public final MaterialToolbar govToolbar;
+  public final TextView govRoleBadge;
 
-  private ActivityGovMainBinding(@NonNull CoordinatorLayout rootView,
-      @NonNull BottomNavigationView govBottomNav, @NonNull FragmentContainerView govNavHostFragment,
-      @NonNull MaterialToolbar govToolbar) {
+  @NonNull
+  public final LinearLayout govTopBar;
+
+  private ActivityGovMainBinding(@NonNull ConstraintLayout rootView,
+      @NonNull ConstraintLayout activityGovMain, @NonNull TextView govAppTitle,
+      @NonNull ImageView govLogo, @NonNull FragmentContainerView govNavHostFragment,
+      @NonNull TextView govRoleBadge, @NonNull LinearLayout govTopBar) {
     this.rootView = rootView;
-    this.govBottomNav = govBottomNav;
+    this.activityGovMain = activityGovMain;
+    this.govAppTitle = govAppTitle;
+    this.govLogo = govLogo;
     this.govNavHostFragment = govNavHostFragment;
-    this.govToolbar = govToolbar;
+    this.govRoleBadge = govRoleBadge;
+    this.govTopBar = govTopBar;
   }
 
   @Override
   @NonNull
-  public CoordinatorLayout getRoot() {
+  public ConstraintLayout getRoot() {
     return rootView;
   }
 
@@ -66,26 +80,40 @@ public final class ActivityGovMainBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.govBottomNav;
-      BottomNavigationView govBottomNav = ViewBindings.findChildViewById(rootView, id);
-      if (govBottomNav == null) {
+      ConstraintLayout activityGovMain = (ConstraintLayout) rootView;
+
+      id = R.id.gov_app_title;
+      TextView govAppTitle = ViewBindings.findChildViewById(rootView, id);
+      if (govAppTitle == null) {
         break missingId;
       }
 
-      id = R.id.govNavHostFragment;
+      id = R.id.gov_logo;
+      ImageView govLogo = ViewBindings.findChildViewById(rootView, id);
+      if (govLogo == null) {
+        break missingId;
+      }
+
+      id = R.id.gov_nav_host_fragment;
       FragmentContainerView govNavHostFragment = ViewBindings.findChildViewById(rootView, id);
       if (govNavHostFragment == null) {
         break missingId;
       }
 
-      id = R.id.govToolbar;
-      MaterialToolbar govToolbar = ViewBindings.findChildViewById(rootView, id);
-      if (govToolbar == null) {
+      id = R.id.gov_role_badge;
+      TextView govRoleBadge = ViewBindings.findChildViewById(rootView, id);
+      if (govRoleBadge == null) {
         break missingId;
       }
 
-      return new ActivityGovMainBinding((CoordinatorLayout) rootView, govBottomNav,
-          govNavHostFragment, govToolbar);
+      id = R.id.gov_top_bar;
+      LinearLayout govTopBar = ViewBindings.findChildViewById(rootView, id);
+      if (govTopBar == null) {
+        break missingId;
+      }
+
+      return new ActivityGovMainBinding((ConstraintLayout) rootView, activityGovMain, govAppTitle,
+          govLogo, govNavHostFragment, govRoleBadge, govTopBar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

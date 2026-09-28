@@ -54,6 +54,12 @@ public final class CitizenComplaintStore {
         preferences(context).edit().putString(COMPLAINTS_KEY, GSON.toJson(complaints)).apply();
     }
 
+    public static void replaceComplaints(Context context, List<Complaint> syncedComplaints) {
+        List<Complaint> authoritative = syncedComplaints == null ? new ArrayList<>() : new ArrayList<>(syncedComplaints);
+        Collections.sort(authoritative, (first, second) -> Long.compare(second.getCreatedAt(), first.getCreatedAt()));
+        preferences(context).edit().putString(COMPLAINTS_KEY, GSON.toJson(authoritative)).apply();
+    }
+
     public static void saveDraft(Context context, Draft draft) {
         preferences(context).edit().putString(DRAFT_KEY, GSON.toJson(draft)).apply();
     }

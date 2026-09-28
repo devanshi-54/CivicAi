@@ -4,43 +4,125 @@ package com.civicai.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.widget.NestedScrollView;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.civicai.R;
+import com.google.android.material.card.MaterialCardView;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
 
 public final class FragmentGovDashboardBinding implements ViewBinding {
   @NonNull
-  private final NestedScrollView rootView;
+  private final ScrollView rootView;
 
   @NonNull
-  public final RecyclerView rvGovDashboardComplaints;
+  public final MaterialCardView cardHighPriority;
 
   @NonNull
-  public final TextView tvActiveClustersCount;
+  public final MaterialCardView cardOpenPriorityQueue;
 
   @NonNull
-  public final TextView tvHighPriorityCount;
+  public final MaterialCardView cardPending;
 
-  private FragmentGovDashboardBinding(@NonNull NestedScrollView rootView,
-      @NonNull RecyclerView rvGovDashboardComplaints, @NonNull TextView tvActiveClustersCount,
-      @NonNull TextView tvHighPriorityCount) {
+  @NonNull
+  public final MaterialCardView cardResolved;
+
+  @NonNull
+  public final MaterialCardView cardTotal;
+
+  @NonNull
+  public final TextView dashboardEmptyState;
+
+  @NonNull
+  public final TextView dashboardGreeting;
+
+  @NonNull
+  public final LinearLayout dashboardHeader;
+
+  @NonNull
+  public final TextView dashboardSubtitle;
+
+  @NonNull
+  public final TextView dashboardTitle;
+
+  @NonNull
+  public final ScrollView fragmentGovDashboardRoot;
+
+  @NonNull
+  public final LinearLayout recentComplaintsContainer;
+
+  @NonNull
+  public final TextView sectionRecentTitle;
+
+  @NonNull
+  public final TextView statHighCount;
+
+  @NonNull
+  public final TextView statHighLabel;
+
+  @NonNull
+  public final TextView statPendingCount;
+
+  @NonNull
+  public final TextView statPendingLabel;
+
+  @NonNull
+  public final TextView statResolvedCount;
+
+  @NonNull
+  public final TextView statResolvedLabel;
+
+  @NonNull
+  public final TextView statTotalCount;
+
+  @NonNull
+  public final TextView statTotalLabel;
+
+  private FragmentGovDashboardBinding(@NonNull ScrollView rootView,
+      @NonNull MaterialCardView cardHighPriority, @NonNull MaterialCardView cardOpenPriorityQueue,
+      @NonNull MaterialCardView cardPending, @NonNull MaterialCardView cardResolved,
+      @NonNull MaterialCardView cardTotal, @NonNull TextView dashboardEmptyState,
+      @NonNull TextView dashboardGreeting, @NonNull LinearLayout dashboardHeader,
+      @NonNull TextView dashboardSubtitle, @NonNull TextView dashboardTitle,
+      @NonNull ScrollView fragmentGovDashboardRoot, @NonNull LinearLayout recentComplaintsContainer,
+      @NonNull TextView sectionRecentTitle, @NonNull TextView statHighCount,
+      @NonNull TextView statHighLabel, @NonNull TextView statPendingCount,
+      @NonNull TextView statPendingLabel, @NonNull TextView statResolvedCount,
+      @NonNull TextView statResolvedLabel, @NonNull TextView statTotalCount,
+      @NonNull TextView statTotalLabel) {
     this.rootView = rootView;
-    this.rvGovDashboardComplaints = rvGovDashboardComplaints;
-    this.tvActiveClustersCount = tvActiveClustersCount;
-    this.tvHighPriorityCount = tvHighPriorityCount;
+    this.cardHighPriority = cardHighPriority;
+    this.cardOpenPriorityQueue = cardOpenPriorityQueue;
+    this.cardPending = cardPending;
+    this.cardResolved = cardResolved;
+    this.cardTotal = cardTotal;
+    this.dashboardEmptyState = dashboardEmptyState;
+    this.dashboardGreeting = dashboardGreeting;
+    this.dashboardHeader = dashboardHeader;
+    this.dashboardSubtitle = dashboardSubtitle;
+    this.dashboardTitle = dashboardTitle;
+    this.fragmentGovDashboardRoot = fragmentGovDashboardRoot;
+    this.recentComplaintsContainer = recentComplaintsContainer;
+    this.sectionRecentTitle = sectionRecentTitle;
+    this.statHighCount = statHighCount;
+    this.statHighLabel = statHighLabel;
+    this.statPendingCount = statPendingCount;
+    this.statPendingLabel = statPendingLabel;
+    this.statResolvedCount = statResolvedCount;
+    this.statResolvedLabel = statResolvedLabel;
+    this.statTotalCount = statTotalCount;
+    this.statTotalLabel = statTotalLabel;
   }
 
   @Override
   @NonNull
-  public NestedScrollView getRoot() {
+  public ScrollView getRoot() {
     return rootView;
   }
 
@@ -65,26 +147,134 @@ public final class FragmentGovDashboardBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.rvGovDashboardComplaints;
-      RecyclerView rvGovDashboardComplaints = ViewBindings.findChildViewById(rootView, id);
-      if (rvGovDashboardComplaints == null) {
+      id = R.id.card_high_priority;
+      MaterialCardView cardHighPriority = ViewBindings.findChildViewById(rootView, id);
+      if (cardHighPriority == null) {
         break missingId;
       }
 
-      id = R.id.tvActiveClustersCount;
-      TextView tvActiveClustersCount = ViewBindings.findChildViewById(rootView, id);
-      if (tvActiveClustersCount == null) {
+      id = R.id.card_open_priority_queue;
+      MaterialCardView cardOpenPriorityQueue = ViewBindings.findChildViewById(rootView, id);
+      if (cardOpenPriorityQueue == null) {
         break missingId;
       }
 
-      id = R.id.tvHighPriorityCount;
-      TextView tvHighPriorityCount = ViewBindings.findChildViewById(rootView, id);
-      if (tvHighPriorityCount == null) {
+      id = R.id.card_pending;
+      MaterialCardView cardPending = ViewBindings.findChildViewById(rootView, id);
+      if (cardPending == null) {
         break missingId;
       }
 
-      return new FragmentGovDashboardBinding((NestedScrollView) rootView, rvGovDashboardComplaints,
-          tvActiveClustersCount, tvHighPriorityCount);
+      id = R.id.card_resolved;
+      MaterialCardView cardResolved = ViewBindings.findChildViewById(rootView, id);
+      if (cardResolved == null) {
+        break missingId;
+      }
+
+      id = R.id.card_total;
+      MaterialCardView cardTotal = ViewBindings.findChildViewById(rootView, id);
+      if (cardTotal == null) {
+        break missingId;
+      }
+
+      id = R.id.dashboard_empty_state;
+      TextView dashboardEmptyState = ViewBindings.findChildViewById(rootView, id);
+      if (dashboardEmptyState == null) {
+        break missingId;
+      }
+
+      id = R.id.dashboard_greeting;
+      TextView dashboardGreeting = ViewBindings.findChildViewById(rootView, id);
+      if (dashboardGreeting == null) {
+        break missingId;
+      }
+
+      id = R.id.dashboard_header;
+      LinearLayout dashboardHeader = ViewBindings.findChildViewById(rootView, id);
+      if (dashboardHeader == null) {
+        break missingId;
+      }
+
+      id = R.id.dashboard_subtitle;
+      TextView dashboardSubtitle = ViewBindings.findChildViewById(rootView, id);
+      if (dashboardSubtitle == null) {
+        break missingId;
+      }
+
+      id = R.id.dashboard_title;
+      TextView dashboardTitle = ViewBindings.findChildViewById(rootView, id);
+      if (dashboardTitle == null) {
+        break missingId;
+      }
+
+      ScrollView fragmentGovDashboardRoot = (ScrollView) rootView;
+
+      id = R.id.recent_complaints_container;
+      LinearLayout recentComplaintsContainer = ViewBindings.findChildViewById(rootView, id);
+      if (recentComplaintsContainer == null) {
+        break missingId;
+      }
+
+      id = R.id.section_recent_title;
+      TextView sectionRecentTitle = ViewBindings.findChildViewById(rootView, id);
+      if (sectionRecentTitle == null) {
+        break missingId;
+      }
+
+      id = R.id.stat_high_count;
+      TextView statHighCount = ViewBindings.findChildViewById(rootView, id);
+      if (statHighCount == null) {
+        break missingId;
+      }
+
+      id = R.id.stat_high_label;
+      TextView statHighLabel = ViewBindings.findChildViewById(rootView, id);
+      if (statHighLabel == null) {
+        break missingId;
+      }
+
+      id = R.id.stat_pending_count;
+      TextView statPendingCount = ViewBindings.findChildViewById(rootView, id);
+      if (statPendingCount == null) {
+        break missingId;
+      }
+
+      id = R.id.stat_pending_label;
+      TextView statPendingLabel = ViewBindings.findChildViewById(rootView, id);
+      if (statPendingLabel == null) {
+        break missingId;
+      }
+
+      id = R.id.stat_resolved_count;
+      TextView statResolvedCount = ViewBindings.findChildViewById(rootView, id);
+      if (statResolvedCount == null) {
+        break missingId;
+      }
+
+      id = R.id.stat_resolved_label;
+      TextView statResolvedLabel = ViewBindings.findChildViewById(rootView, id);
+      if (statResolvedLabel == null) {
+        break missingId;
+      }
+
+      id = R.id.stat_total_count;
+      TextView statTotalCount = ViewBindings.findChildViewById(rootView, id);
+      if (statTotalCount == null) {
+        break missingId;
+      }
+
+      id = R.id.stat_total_label;
+      TextView statTotalLabel = ViewBindings.findChildViewById(rootView, id);
+      if (statTotalLabel == null) {
+        break missingId;
+      }
+
+      return new FragmentGovDashboardBinding((ScrollView) rootView, cardHighPriority,
+          cardOpenPriorityQueue, cardPending, cardResolved, cardTotal, dashboardEmptyState,
+          dashboardGreeting, dashboardHeader, dashboardSubtitle, dashboardTitle,
+          fragmentGovDashboardRoot, recentComplaintsContainer, sectionRecentTitle, statHighCount,
+          statHighLabel, statPendingCount, statPendingLabel, statResolvedCount, statResolvedLabel,
+          statTotalCount, statTotalLabel);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

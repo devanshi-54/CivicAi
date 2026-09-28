@@ -1,54 +1,86 @@
 [
     {
-        "merged": "com.civicai.app-mergeDebugResources-3:/layout/fragment_gov_complaint_map.xml",
-        "source": "com.civicai.app-main-6:/layout/fragment_gov_complaint_map.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-mergeDebugResources-4:\\layout\\activity_citizen_complaint_submitted.xml",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\activity_citizen_complaint_submitted.xml"
     },
     {
-        "merged": "com.civicai.app-mergeDebugResources-3:/layout/activity_citizen_main.xml",
-        "source": "com.civicai.app-main-6:/layout/activity_citizen_main.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-mergeDebugResources-4:\\layout\\activity_citizen_report_complaint.xml",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\activity_citizen_report_complaint.xml"
     },
     {
-        "merged": "com.civicai.app-mergeDebugResources-3:/layout/fragment_gov_dashboard.xml",
-        "source": "com.civicai.app-main-6:/layout/fragment_gov_dashboard.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-mergeDebugResources-4:\\layout\\item_citizen_notification_card.xml",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\item_citizen_notification_card.xml"
     },
     {
-        "merged": "com.civicai.app-mergeDebugResources-3:/layout/activity_gov_main.xml",
-        "source": "com.civicai.app-main-6:/layout/activity_gov_main.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-mergeDebugResources-4:\\layout\\fragment_gov_complaint_details.xml",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\fragment_gov_complaint_details.xml"
     },
     {
-        "merged": "com.civicai.app-mergeDebugResources-3:/layout/fragment_citizen_home.xml",
-        "source": "com.civicai.app-main-6:/layout/fragment_citizen_home.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-mergeDebugResources-4:\\layout\\activity_citizen_onboarding_1.xml",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\activity_citizen_onboarding_1.xml"
     },
     {
-        "merged": "com.civicai.app-mergeDebugResources-3:/layout/fragment_citizen_report.xml",
-        "source": "com.civicai.app-main-6:/layout/fragment_citizen_report.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-mergeDebugResources-4:\\layout\\activity_citizen_home.xml",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\activity_citizen_home.xml"
     },
     {
-        "merged": "com.civicai.app-mergeDebugResources-3:/layout/activity_main.xml",
-        "source": "com.civicai.app-main-6:/layout/activity_main.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-mergeDebugResources-4:\\layout\\fragment_gov_decision.xml",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\fragment_gov_decision.xml"
     },
     {
-        "merged": "com.civicai.app-mergeDebugResources-3:/layout/fragment_gov_priority_queue.xml",
-        "source": "com.civicai.app-main-6:/layout/fragment_gov_priority_queue.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-mergeDebugResources-4:\\layout\\activity_citizen_my_complaints.xml",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\activity_citizen_my_complaints.xml"
     },
     {
-        "merged": "com.civicai.app-mergeDebugResources-3:/layout/fragment_citizen_profile.xml",
-        "source": "com.civicai.app-main-6:/layout/fragment_citizen_profile.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-mergeDebugResources-4:\\layout\\activity_citizen_notification_details.xml",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\activity_citizen_notification_details.xml"
     },
     {
-        "merged": "com.civicai.app-mergeDebugResources-3:/layout/fragment_gov_issue_clusters.xml",
-        "source": "com.civicai.app-main-6:/layout/fragment_gov_issue_clusters.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-mergeDebugResources-4:\\layout\\fragment_gov_priority_queue.xml",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\fragment_gov_priority_queue.xml"
     },
     {
-        "merged": "com.civicai.app-mergeDebugResources-3:/layout/fragment_citizen_notifications.xml",
-        "source": "com.civicai.app-main-6:/layout/fragment_citizen_notifications.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-mergeDebugResources-4:\\layout\\activity_citizen_notifications.xml",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\activity_citizen_notifications.xml"
     },
     {
-        "merged": "com.civicai.app-mergeDebugResources-3:/layout/fragment_citizen_my_complaints.xml",
-        "source": "com.civicai.app-main-6:/layout/fragment_citizen_my_complaints.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-mergeDebugResources-4:\\layout\\activity_citizen_onboarding_2.xml",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\activity_citizen_onboarding_2.xml"
     },
     {
-        "merged": "com.civicai.app-mergeDebugResources-3:/layout/fragment_gov_analytics.xml",
-        "source": "com.civicai.app-main-6:/layout/fragment_gov_analytics.xml"
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-mergeDebugResources-4:\\layout\\item_gov_complaint_card.xml",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\item_gov_complaint_card.xml"
+    },
+    {
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-mergeDebugResources-4:\\layout\\activity_citizen_ai_analysis.xml",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\activity_citizen_ai_analysis.xml"
+    },
+    {
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-mergeDebugResources-4:\\layout\\activity_gov_main.xml",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\activity_gov_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-mergeDebugResources-4:\\layout\\fragment_gov_dashboard.xml",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\fragment_gov_dashboard.xml"
+    },
+    {
+        "merged": "com.civicai.app-mergeDebugResources-4:/layout/activity_citizen_complaint_details.xml",
+        "source": "com.civicai.app-main-7:/layout/activity_citizen_complaint_details.xml"
+    },
+    {
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-mergeDebugResources-4:\\layout\\activity_citizen_profile_settings.xml",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\activity_citizen_profile_settings.xml"
+    },
+    {
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-mergeDebugResources-4:\\layout\\item_citizen_complaint_card.xml",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\item_citizen_complaint_card.xml"
+    },
+    {
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-mergeDebugResources-4:\\layout\\activity_citizen_onboarding_3.xml",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\activity_citizen_onboarding_3.xml"
+    },
+    {
+        "merged": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-mergeDebugResources-4:\\layout\\activity_citizen_complaint_details.xml",
+        "source": "C:\\Users\\devan\\.gradle\\daemon\\8.13\\com.civicai.app-main-7:\\layout\\activity_citizen_complaint_details.xml"
     }
 ]

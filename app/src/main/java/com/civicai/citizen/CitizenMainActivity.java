@@ -1,10 +1,13 @@
 package com.civicai.citizen;
 
+import android.util.Patterns;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
+import android.content.ActivityNotFoundException;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.location.Location;
@@ -18,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,9 +35,19 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
+
 import com.civicai.R;
+import com.civicai.ai.AiAnalysisCallback;
+import com.civicai.ai.AiAnalysisService;
+import com.civicai.firebase.FirestoreHelper;
+import com.civicai.model.AiAnalysisResult;
 import com.civicai.model.Complaint;
 import com.civicai.model.ComplaintStatus;
+import com.civicai.model.User;
+import com.civicai.repository.ComplaintRepository;
+import com.civicai.repository.RepositoryCallback;
+import com.civicai.repository.UserRepository;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.Priority;
 import com.google.android.gms.tasks.CancellationTokenSource;
@@ -60,6 +74,7 @@ public class CitizenMainActivity extends AppCompatActivity {
     private final ArrayDeque<Integer> screenHistory = new ArrayDeque<>();
     private int currentScreen = R.layout.activity_citizen_home;
     private String currentComplaintId;
+    private AiAnalysisResult currentAiAnalysisResult;
     private String selectedImageUri = "";
     private Double selectedLatitude;
     private Double selectedLongitude;
@@ -74,6 +89,10 @@ public class CitizenMainActivity extends AppCompatActivity {
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override public void handleOnBackPressed() { goBack(); }
         });
+        if (!isRegistrationComplete(getCurrentProfile())) {
+            currentScreen = R.layout.activity_citizen_onboarding_1;
+        //    currentScreen = R.layout.activity_citizen_profile_settings;
+        }
         showScreen(currentScreen, false);
     }
 
@@ -85,7 +104,7 @@ public class CitizenMainActivity extends AppCompatActivity {
                 if (!folder.exists() && !folder.mkdirs()) throw new IllegalStateException("Could not create photo folder");
                 File image = new File(folder, "evidence_" + System.currentTimeMillis() + ".jpg");
                 try (FileOutputStream output = new FileOutputStream(image)) {
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 88, output);
+                    if (!bitmap.compress(Bitmap.CompressFormat.JPEG, 88, output)) throw new IllegalStateException("Could not encode photo");
                 }
                 selectedImageUri = Uri.fromFile(image).toString();
                 updatePhotoPreview();
@@ -115,6 +134,7 @@ public class CitizenMainActivity extends AppCompatActivity {
         if (rememberCurrent) screenHistory.push(currentScreen);
         currentScreen = layout;
         setContentView(layout);
+        loadOnboardingPhoto(layout);
         wireToolbar();
         wireBottomNavigation();
         wireActions();
@@ -122,12 +142,47 @@ public class CitizenMainActivity extends AppCompatActivity {
         if (layout == R.layout.activity_citizen_ai_analysis) bindAnalysisPreview();
         if (layout == R.layout.activity_citizen_complaint_submitted) bindSubmissionConfirmation();
         if (layout == R.layout.activity_citizen_complaint_details) bindComplaintDetails();
+        if (layout == R.layout.activity_citizen_profile_settings) bindProfile();
+        if (layout == R.layout.activity_citizen_home) bindHomeGreeting();
         populateLists();
+        if (layout == R.layout.activity_citizen_home || layout == R.layout.activity_citizen_my_complaints) {
+            syncMyComplaints();
+        }
+    }
+
+    private void loadOnboardingPhoto(int layout) {
+        int imageResource;
+        if (layout == R.layout.activity_citizen_onboarding_1) {
+            imageResource = R.drawable.onboarding_photo_1;
+        } else if (layout == R.layout.activity_citizen_onboarding_2) {
+            imageResource = R.drawable.onboarding_photo_2;
+        } else if (layout == R.layout.activity_citizen_onboarding_3) {
+            imageResource = R.drawable.onboarding_photo_3;
+        } else {
+            return;
+        }
+        ImageView image = findViewById(R.id.imgOnboarding);
+        if (image != null) {
+            image.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            image.setImageResource(imageResource);
+        }
+    }
+    private void bindHomeGreeting() {
+        UserRepository.getInstance().getCurrentUser(new RepositoryCallback<User>() {
+            @Override public void onSuccess(User user) {
+                if (currentScreen != R.layout.activity_citizen_home || user == null) return;
+                setLabel(R.id.tvGreeting, "Welcome, " + (TextUtils.isEmpty(user.getName()) ? "Citizen" : user.getName()));
+                setLabel(R.id.tvCitizenLocation, TextUtils.isEmpty(user.getWard()) ? "Citizen account" : "Ward " + user.getWard() + " • Citizen");
+            }
+            @Override public void onError(Exception error) { Log.w("CitizenMainActivity", "Could not load greeting", error); }
+        });
     }
 
     private void wireToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
-        if (toolbar != null) toolbar.setNavigationOnClickListener(v -> goBack());
+        if (toolbar != null) {
+            toolbar.setNavigationOnClickListener(v -> goBack());
+        }
     }
 
     private void wireBottomNavigation() {
@@ -157,7 +212,9 @@ public class CitizenMainActivity extends AppCompatActivity {
         click(R.id.btnViewAll, () -> open(R.layout.activity_citizen_my_complaints));
         click(R.id.btnAnalyze, this::continueToAnalysis);
         click(R.id.btnSubmitFinal, this::submitComplaint);
+        click(R.id.btnSaveProfile, this::saveProfile);
         click(R.id.btnTrackComplaint, () -> openComplaintDetails(currentComplaintId));
+        click(R.id.btnSendFeedback, this::sendComplaintFeedback);
         click(R.id.btnBackHome, () -> showScreen(R.layout.activity_citizen_home, false));
         click(R.id.btnViewComplaint, () -> open(R.layout.activity_citizen_my_complaints));
         click(R.id.btnSkip, () -> showScreen(R.layout.activity_citizen_home, false));
@@ -169,7 +226,7 @@ public class CitizenMainActivity extends AppCompatActivity {
         click(R.id.btnGetStarted, () -> showScreen(R.layout.activity_citizen_home, false));
         click(R.id.btnLogout, () -> Toast.makeText(this, "You are signed out", Toast.LENGTH_SHORT).show());
         click(R.id.btnSaveDraft, this::saveDraftFromForm);
-        click(R.id.btnCamera, () -> cameraPicker.launch(null));
+        click(R.id.btnCamera, this::launchCameraSafely);
         click(R.id.btnGallery, () -> galleryPicker.launch(new String[]{"image/*"}));
         click(R.id.btnGetLocation, this::requestCurrentLocation);
         click(R.id.btnCopyTicket, this::copyTicketId);
@@ -188,9 +245,45 @@ public class CitizenMainActivity extends AppCompatActivity {
             setupComplaintTabs(complaintRows);
         }
         RecyclerView notifications = findViewById(R.id.rvNotifications);
-        if (notifications != null) setRows(notifications, Arrays.asList(
-                new Row("Complaint status updated", "Your report status will appear here when updated.", "", ""),
-                new Row("Civic alerts", "Local civic updates will appear here.", "", "")), true);
+        if (notifications != null) setRows(notifications, new ArrayList<>(), true);
+    }
+
+    private void launchCameraSafely() {
+        Intent cameraIntent = new Intent("android.media.action.IMAGE_CAPTURE");
+        if (getPackageManager().resolveActivity(cameraIntent, PackageManager.MATCH_DEFAULT_ONLY) == null) {
+            Toast.makeText(this, "Camera app is not available on this device.", Toast.LENGTH_LONG).show();
+            return;
+        }
+        try {
+            cameraPicker.launch(null);
+        } catch (ActivityNotFoundException | SecurityException | IllegalStateException error) {
+            Log.e("CitizenMainActivity", "Unable to open camera", error);
+            Toast.makeText(this, "Camera could not be opened. Try choosing a photo instead.", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void syncMyComplaints() {
+        UserRepository.getInstance().getCurrentUser(new RepositoryCallback<User>() {
+            @Override public void onSuccess(User user) {
+                ComplaintRepository.getInstance().getComplaintsByUser(user.getUserId(), new RepositoryCallback<List<Complaint>>() {
+                    @Override public void onSuccess(List<Complaint> complaints) {
+                        CitizenComplaintStore.replaceComplaints(CitizenMainActivity.this, complaints);
+                        if (currentScreen == R.layout.activity_citizen_home || currentScreen == R.layout.activity_citizen_my_complaints) {
+                            populateLists();
+                        }
+                    }
+                    @Override public void onError(Exception error) {
+                        Log.w("CitizenMainActivity", "Could not sync citizen complaints: " + error.getMessage());
+                        if (currentScreen == R.layout.activity_citizen_my_complaints) {
+                            Toast.makeText(CitizenMainActivity.this, "Firebase could not refresh complaints. Showing saved data.", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+            }
+            @Override public void onError(Exception error) {
+                Log.w("CitizenMainActivity", "Could not load citizen identity: " + error.getMessage());
+            }
+        });
     }
 
     private List<Row> getComplaintRows() {
@@ -268,7 +361,32 @@ public class CitizenMainActivity extends AppCompatActivity {
         CitizenComplaintStore.Draft draft = readDraftFromForm();
         if (!validateDraft(draft)) return;
         CitizenComplaintStore.saveDraft(this, draft);
+        User user = getCurrentProfile();
+        if (!isRegistrationComplete(user)) {
+            Toast.makeText(this, "Pehla profile registration na badha required fields bharo.", Toast.LENGTH_LONG).show();
+            open(R.layout.activity_citizen_profile_settings);
+            return;
+        }
         open(R.layout.activity_citizen_ai_analysis);
+    }
+
+    private User getCurrentProfile() {
+        final User[] current = new User[1];
+        UserRepository.getInstance().getCurrentUser(new RepositoryCallback<User>() {
+            @Override public void onSuccess(User user) { current[0] = user; }
+            @Override public void onError(Exception ignored) { }
+        });
+        return current[0];
+    }
+
+    private boolean isRegistrationComplete(User user) {
+        return user != null
+                && !TextUtils.isEmpty(user.getName())
+                && user.getName().trim().length() >= 2
+                && !TextUtils.isEmpty(user.getEmail())
+                && Patterns.EMAIL_ADDRESS.matcher(user.getEmail().trim()).matches()
+                && !TextUtils.isEmpty(user.getPhone())
+                && user.getPhone().replaceAll("\\D", "").length() >= 10;
     }
 
     private CitizenComplaintStore.Draft readDraftFromForm() {
@@ -405,6 +523,57 @@ public class CitizenMainActivity extends AppCompatActivity {
         CitizenComplaintStore.Draft draft = CitizenComplaintStore.getDraft(this);
         TextView title = findViewById(R.id.tvAnalysisTitle);
         if (title != null && draft != null) title.setText(draft.title);
+        currentAiAnalysisResult = null;
+        setAnalyzeSubmitEnabled(false);
+        TextView status = findViewById(R.id.tvAiStatus);
+        if (status != null) status.setText("Gemini AI is analyzing your report…");
+        if (draft == null) return;
+        Complaint input = new Complaint();
+        input.setTitle(draft.title);
+        input.setDescription(draft.description);
+        input.setCategory(draft.category);
+        AiAnalysisService.getInstance().analyzeComplaint(input, new AiAnalysisCallback() {
+            @Override public void onAnalysisComplete(AiAnalysisResult result) {
+                if (currentScreen != R.layout.activity_citizen_ai_analysis) return;
+                currentAiAnalysisResult = result;
+                bindAiAnalysisResult(result);
+                setAnalyzeSubmitEnabled(true);
+            }
+
+            @Override public void onAnalysisError(String errorMessage, boolean isRetryable) {
+                if (currentScreen != R.layout.activity_citizen_ai_analysis) return;
+                TextView currentStatus = findViewById(R.id.tvAiStatus);
+                if (currentStatus != null) currentStatus.setText("AI unavailable • You can still submit for human review");
+                setAnalyzeSubmitEnabled(true);
+                Toast.makeText(CitizenMainActivity.this, errorMessage, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void bindAiAnalysisResult(AiAnalysisResult result) {
+        setLabel(R.id.tvAiStatus, "Gemini AI triage complete • recommendation only");
+        setLabel(R.id.tvAiPriority, "Suggested priority: " + result.getPriority());
+        setLabel(R.id.tvAiSeverity, result.getSeverity());
+        setLabel(R.id.tvAiUrgency, result.getUrgency());
+        setLabel(R.id.tvAiSafetyRisk, result.getSafetyRisk());
+        setLabel(R.id.tvAiAffectedPeople, result.getAffectedPeople() > 0
+                ? String.valueOf(result.getAffectedPeople()) : "Unknown");
+        setLabel(R.id.tvAiReason, result.getReason());
+        setLabel(R.id.tvAiDepartment, result.getSuggestedDepartment());
+        setLabel(R.id.tvAiAction, result.getSuggestedAction());
+    }
+
+    private void setLabel(int id, String value) {
+        TextView view = findViewById(id);
+        if (view != null) view.setText(value == null ? "" : value);
+    }
+
+    private void setAnalyzeSubmitEnabled(boolean enabled) {
+        com.google.android.material.button.MaterialButton submit = findViewById(R.id.btnSubmitFinal);
+        if (submit != null) {
+            submit.setEnabled(enabled);
+            submit.setText(enabled ? "Submit Complaint" : "Analyzing…");
+        }
     }
 
     private void submitComplaint() {
@@ -413,24 +582,134 @@ public class CitizenMainActivity extends AppCompatActivity {
             Toast.makeText(this, "Go back and complete the complaint details first", Toast.LENGTH_SHORT).show();
             return;
         }
+        User submittingUser = getCurrentProfile();
+        if (!isRegistrationComplete(submittingUser)) {
+            Toast.makeText(this, "Complaint submit karta pehla registration fields complete karo.", Toast.LENGTH_LONG).show();
+            open(R.layout.activity_citizen_profile_settings);
+            return;
+        }
         Complaint complaint = new Complaint();
         complaint.setComplaintId(createTicketId());
-        complaint.setUserId("local-citizen");
-        complaint.setCitizenName("Citizen");
+        complaint.setUserId(submittingUser.getUserId());
+        complaint.setCitizenName(submittingUser.getName());
         complaint.setTitle(draft.title);
         complaint.setDescription(draft.description);
         complaint.setCategory(draft.category);
         complaint.setLocationAddress(displayLocation(draft));
         if (draft.latitude != null) complaint.setLatitude(draft.latitude);
         if (draft.longitude != null) complaint.setLongitude(draft.longitude);
-        if (!TextUtils.isEmpty(draft.imageUri)) complaint.setImageUrl(draft.imageUri);
+        String localImageUri = draft.imageUri;
+        if (currentAiAnalysisResult != null) {
+            complaint.setAiCategory(currentAiAnalysisResult.getCategory());
+            complaint.setAiSummary(currentAiAnalysisResult.getSummary());
+            complaint.setAiSeverity(currentAiAnalysisResult.getSeverity());
+            complaint.setAiUrgency(currentAiAnalysisResult.getUrgency());
+            complaint.setAiSafetyRisk(currentAiAnalysisResult.getSafetyRisk());
+            complaint.setAiAffectedPeople(currentAiAnalysisResult.getAffectedPeople());
+            complaint.setAiPriority(currentAiAnalysisResult.getPriority());
+            complaint.setAiReason(currentAiAnalysisResult.getReason());
+            complaint.setSuggestedDepartment(currentAiAnalysisResult.getSuggestedDepartment());
+            complaint.setSuggestedAction(currentAiAnalysisResult.getSuggestedAction());
+            complaint.setAiConfidence(currentAiAnalysisResult.getConfidence());
+        }
         complaint.setStatus(ComplaintStatus.SUBMITTED);
         complaint.setCreatedAt(System.currentTimeMillis());
         complaint.setUpdatedAt(complaint.getCreatedAt());
         CitizenComplaintStore.saveComplaint(this, complaint);
-        CitizenComplaintStore.clearDraft(this);
+        UserRepository.getInstance().getCurrentUser(new RepositoryCallback<User>() {
+            @Override public void onSuccess(User user) {
+                UserRepository.getInstance().saveUser(user, new RepositoryCallback<Void>() {
+                    @Override public void onSuccess(Void result) { }
+                    @Override public void onError(Exception error) { Log.w("CitizenMainActivity", "Profile sync failed: " + error.getMessage()); }
+                });
+            }
+            @Override public void onError(Exception ignored) { }
+        });
         currentComplaintId = complaint.getComplaintId();
         showScreen(R.layout.activity_citizen_complaint_submitted, true);
+        if (TextUtils.isEmpty(localImageUri)) {
+            persistComplaint(complaint);
+        } else {
+            FirestoreHelper.uploadComplaintImage(Uri.parse(localImageUri), complaint.getComplaintId(), new RepositoryCallback<String>() {
+                @Override public void onSuccess(String downloadUrl) {
+                    complaint.setImageUrl(downloadUrl);
+                    CitizenComplaintStore.saveComplaint(CitizenMainActivity.this, complaint);
+                    persistComplaint(complaint);
+                }
+                @Override public void onError(Exception error) {
+                    Log.w("CitizenMainActivity", "Evidence upload failed: " + error.getMessage());
+                    complaint.setImageUrl(null);
+                    CitizenComplaintStore.saveComplaint(CitizenMainActivity.this, complaint);
+                    Toast.makeText(CitizenMainActivity.this, "Photo upload failed; submitting complaint without photo.", Toast.LENGTH_LONG).show();
+                    persistComplaint(complaint);
+                }
+            });
+        }
+    }
+
+    private void persistComplaint(Complaint complaint) {
+        ComplaintRepository.getInstance().submitComplaint(complaint, new RepositoryCallback<String>() {
+            @Override public void onSuccess(String result) {
+                CitizenComplaintStore.clearDraft(CitizenMainActivity.this);
+                Log.d("CitizenMainActivity", "Complaint synced to Firestore: " + result);
+                Toast.makeText(CitizenMainActivity.this, "Complaint saved to Firebase.", Toast.LENGTH_SHORT).show();
+            }
+            @Override public void onError(Exception error) {
+                Log.w("CitizenMainActivity", "Firestore sync failed; local copy preserved: " + error.getMessage());
+                Toast.makeText(CitizenMainActivity.this, "Firebase save failed. Your draft is kept; check connection and retry.", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void bindProfile() {
+        UserRepository.getInstance().refreshCurrentUser(new RepositoryCallback<User>() {
+            @Override public void onSuccess(User user) {
+                TextInputEditText name = findViewById(R.id.editProfileName);
+                TextInputEditText email = findViewById(R.id.editProfileEmail);
+                TextInputEditText phone = findViewById(R.id.editProfilePhone);
+                if (name != null) name.setText(user.getName());
+                if (email != null) email.setText(user.getEmail());
+                if (phone != null) phone.setText(user.getPhone());
+            }
+            @Override public void onError(Exception error) { Log.w("CitizenMainActivity", "Profile load failed: " + error.getMessage()); }
+        });
+    }
+
+    private void saveProfile() {
+        UserRepository.getInstance().getCurrentUser(new RepositoryCallback<User>() {
+            @Override public void onSuccess(User user) {
+                TextInputEditText name = findViewById(R.id.editProfileName);
+                TextInputEditText email = findViewById(R.id.editProfileEmail);
+                TextInputEditText phone = findViewById(R.id.editProfilePhone);
+                user.setName(name == null ? "" : String.valueOf(name.getText()).trim());
+                user.setEmail(email == null ? "" : String.valueOf(email.getText()).trim());
+                user.setPhone(phone == null ? "" : String.valueOf(phone.getText()).trim());
+                if (TextUtils.isEmpty(user.getName()) || user.getName().length() < 2) {
+                    if (name != null) name.setError("Name is required (at least 2 characters)");
+                    return;
+                }
+                if (!Patterns.EMAIL_ADDRESS.matcher(user.getEmail()).matches()) {
+                    if (email != null) email.setError("Enter a valid email address");
+                    return;
+                }
+                if (user.getPhone().replaceAll("\\D", "").length() < 10) {
+                    if (phone != null) phone.setError("Enter a valid phone number (at least 10 digits)");
+                    return;
+                }
+                UserRepository.getInstance().saveUser(user, new RepositoryCallback<Void>() {
+                    @Override public void onSuccess(Void result) {
+                        Toast.makeText(CitizenMainActivity.this, "Profile saved to Firebase", Toast.LENGTH_SHORT).show();
+                    }
+                    @Override public void onError(Exception error) {
+                        Log.w("CitizenMainActivity", "Profile save failed: " + error.getMessage());
+                        Toast.makeText(CitizenMainActivity.this, "Profile could not sync. Check Firebase connection.", Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+            @Override public void onError(Exception error) {
+                Toast.makeText(CitizenMainActivity.this, "Profile could not be loaded", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private String createTicketId() {
@@ -464,26 +743,147 @@ public class CitizenMainActivity extends AppCompatActivity {
     }
 
     private void openComplaintDetails(String complaintId) {
-        if (CitizenComplaintStore.findComplaint(this, complaintId) == null) {
-            Toast.makeText(this, "Submit a complaint to start tracking it", Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(complaintId)) {
+            Toast.makeText(this, "Select a complaint to track.", Toast.LENGTH_SHORT).show();
             return;
         }
         currentComplaintId = complaintId;
         open(R.layout.activity_citizen_complaint_details);
+
+        // Phase 4: Retrieve latest version from Firestore via ComplaintRepository
+        ComplaintRepository.getInstance().getComplaintById(complaintId, new RepositoryCallback<Complaint>() {
+            @Override
+            public void onSuccess(Complaint remoteComplaint) {
+                if (remoteComplaint != null) {
+                    CitizenComplaintStore.saveComplaint(CitizenMainActivity.this, remoteComplaint);
+                    if (!isFinishing() && !isDestroyed()
+                            && currentScreen == R.layout.activity_citizen_complaint_details
+                            && complaintId.equals(currentComplaintId)) {
+                        bindComplaintDetails();
+                    }
+                }
+            }
+
+            @Override
+            public void onError(Exception exception) {
+                Log.w("CitizenMainActivity", "Firebase status refresh failed: " + exception.getMessage());
+                if (currentScreen == R.layout.activity_citizen_complaint_details
+                        && complaintId.equals(currentComplaintId)) {
+                    Complaint cached = CitizenComplaintStore.findComplaint(CitizenMainActivity.this, complaintId);
+                    setLabel(R.id.tvLiveStatusMessage, cached == null
+                            ? "Could not load complaint status from Firebase. Check your connection and retry."
+                            : "Firebase refresh failed. Showing saved status: " + statusName(cached));
+                    Toast.makeText(CitizenMainActivity.this, "Could not refresh complaint status from Firebase.", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     private void bindComplaintDetails() {
         Complaint complaint = CitizenComplaintStore.findComplaint(this, currentComplaintId);
-        if (complaint == null) return;
         View root = findViewById(android.R.id.content);
+        if (complaint == null) {
+            text(root, R.id.tvDetailTicket, "Loading complaint from Firebase…");
+            text(root, R.id.tvDetailTitle, "");
+            text(root, R.id.tvLiveStatusMessage, "Fetching the latest complaint status…");
+            text(root, R.id.tvDetailLastUpdated, "");
+            ImageView evidence = findViewById(R.id.imgEvidence);
+            if (evidence != null) evidence.setVisibility(View.GONE);
+            return;
+        }
         ComplaintStatus status = complaint.getStatus() == null ? ComplaintStatus.SUBMITTED : complaint.getStatus();
         text(root, R.id.tvDetailTicket, complaint.getComplaintId() + " • " + status.getDisplayName());
         text(root, R.id.tvDetailTitle, complaint.getTitle());
-        text(root, R.id.tvDetailLocation, "📍 " + complaint.getLocationAddress());
+
+        String locationDetails = "📍 " + complaint.getLocationAddress();
+        if (!TextUtils.isEmpty(complaint.getAssignedDepartment())) {
+            locationDetails += "\nDept: " + complaint.getAssignedDepartment();
+        }
+        if (!TextUtils.isEmpty(complaint.getOfficialDecision())) {
+            locationDetails += "\nOfficial Decision: " + complaint.getOfficialDecision();
+        }
+        text(root, R.id.tvDetailLocation, locationDetails);
+        text(root, R.id.tvLiveStatusMessage, "Current status: " + status.getDisplayName());
+        RatingBar feedbackRating = findViewById(R.id.ratingComplaintFeedback);
+        EditText feedbackInput = findViewById(R.id.editComplaintFeedback);
+        if (complaint.getFeedbackSubmittedAt() > 0) {
+            if (feedbackRating != null) feedbackRating.setRating(complaint.getCitizenFeedbackRating());
+            if (feedbackInput != null) feedbackInput.setText(complaint.getCitizenFeedback());
+            com.google.android.material.button.MaterialButton feedbackButton = findViewById(R.id.btnSendFeedback);
+            if (feedbackButton != null) feedbackButton.setText("Update Feedback");
+        }
+        long lastUpdated = complaint.getUpdatedAt() > 0 ? complaint.getUpdatedAt() : complaint.getCreatedAt();
+        String updatedText = lastUpdated > 0
+                ? "Last updated " + new SimpleDateFormat("MMM d, yyyy • h:mm a", Locale.getDefault()).format(new Date(lastUpdated))
+                : "Update time not available";
+        text(root, R.id.tvDetailLastUpdated, updatedText);
+
         ImageView image = findViewById(R.id.imgEvidence);
-        if (image != null && !TextUtils.isEmpty(complaint.getImageUrl())) image.setImageURI(Uri.parse(complaint.getImageUrl()));
-        TextView progress = findViewById(R.id.tvProgressTitle);
-        if (progress != null) progress.setText("Resolution Progress • " + status.getDisplayName());
+        if (image != null) {
+            if (!TextUtils.isEmpty(complaint.getImageUrl())) {
+                image.setVisibility(View.VISIBLE);
+                com.bumptech.glide.Glide.with(this).load(complaint.getImageUrl()).into(image);
+            } else {
+                image.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    private String statusName(Complaint complaint) {
+        ComplaintStatus status = complaint.getStatus() == null ? ComplaintStatus.SUBMITTED : complaint.getStatus();
+        return status.getDisplayName();
+    }
+
+    private void sendComplaintFeedback() {
+        if (TextUtils.isEmpty(currentComplaintId)) {
+            Toast.makeText(this, "Open a complaint before sending feedback.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String complaintId = currentComplaintId;
+        RatingBar ratingBar = findViewById(R.id.ratingComplaintFeedback);
+        EditText feedbackInput = findViewById(R.id.editComplaintFeedback);
+        View sendButton = findViewById(R.id.btnSendFeedback);
+        int rating = ratingBar == null ? 0 : Math.round(ratingBar.getRating());
+        String message = feedbackInput == null || feedbackInput.getText() == null
+                ? "" : feedbackInput.getText().toString().trim();
+        if (rating < 1 || rating > 5) {
+            Toast.makeText(this, "Please choose a rating from 1 to 5 stars.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (sendButton != null) sendButton.setEnabled(false);
+        UserRepository.getInstance().getCurrentUser(new RepositoryCallback<User>() {
+            @Override public void onSuccess(User user) {
+                FirestoreHelper.submitComplaintFeedback(complaintId, user.getUserId(), rating, message,
+                        new RepositoryCallback<Void>() {
+                            @Override public void onSuccess(Void ignored) {
+                                Complaint saved = CitizenComplaintStore.findComplaint(CitizenMainActivity.this, complaintId);
+                                if (saved != null) {
+                                    saved.setCitizenFeedback(message);
+                                    saved.setCitizenFeedbackRating(rating);
+                                    saved.setFeedbackSubmittedAt(System.currentTimeMillis());
+                                    CitizenComplaintStore.saveComplaint(CitizenMainActivity.this, saved);
+                                }
+                                if (sendButton != null) {
+                                    sendButton.setEnabled(true);
+                                    if (sendButton instanceof com.google.android.material.button.MaterialButton) {
+                                        ((com.google.android.material.button.MaterialButton) sendButton).setText("Feedback Sent");
+                                    }
+                                }
+                                if (feedbackInput != null) feedbackInput.setText("");
+                                Toast.makeText(CitizenMainActivity.this, "Feedback sent successfully.", Toast.LENGTH_SHORT).show();
+                            }
+                            @Override public void onError(Exception error) {
+                                Log.e("CitizenMainActivity", "Feedback save failed", error);
+                                if (sendButton != null) sendButton.setEnabled(true);
+                                Toast.makeText(CitizenMainActivity.this, "Feedback failed: " + (error.getMessage() == null ? "Check Firebase connection and rules." : error.getMessage()), Toast.LENGTH_LONG).show();
+                            }
+                        });
+            }
+            @Override public void onError(Exception error) {
+                if (sendButton != null) sendButton.setEnabled(true);
+                Toast.makeText(CitizenMainActivity.this, "Citizen profile could not be loaded.", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void open(int layout) { showScreen(layout, true); }

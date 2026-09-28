@@ -2,116 +2,131 @@ package com.civicai.ai;
 
 import android.os.Handler;
 import android.os.Looper;
+
 import com.civicai.model.AiAnalysisResult;
 import com.civicai.model.Complaint;
 import com.civicai.model.Priority;
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.firebase.ai.FirebaseAI;
+import com.google.firebase.ai.GenerativeModel;
+import com.google.firebase.ai.java.GenerativeModelFutures;
+import com.google.firebase.ai.type.Content;
+import com.google.firebase.ai.type.GenerateContentResponse;
+import com.google.firebase.ai.type.GenerativeBackend;
 
-/**
- * AI Analysis Service implementation.
- * Connects to secure AI inference endpoint (Gemini / CivicAI backend) with robust error handling,
- * timeout resilience, and rule-compliant advisory outputs.
- */
+import org.json.JSONObject;
+
+import java.util.Locale;
+import java.util.concurrent.Executor;
+
+/** Cloud complaint triage using Firebase AI Logic and Gemini Developer API. */
 public class AiAnalysisService implements IAiAnalysisService {
-
+    private static final String MODEL_NAME = "gemini-3.5-flash-lite";
     private static AiAnalysisService instance;
-    private final Handler mainHandler = new Handler(Looper.getMainLooper());
-    private boolean isCancelled = false;
 
-    private AiAnalysisService() {}
+    private final Handler mainHandler = new Handler(Looper.getMainLooper());
+    private final Executor mainExecutor = command -> mainHandler.post(command);
+    private volatile int activeGeneration;
+    private volatile ListenableFuture<?> activeRequest;
+
+    private AiAnalysisService() { }
 
     public static synchronized AiAnalysisService getInstance() {
-        if (instance == null) {
-            instance = new AiAnalysisService();
-        }
+        if (instance == null) instance = new AiAnalysisService();
         return instance;
     }
 
-    @Override
-    public void analyzeComplaint(Complaint complaint, AiAnalysisCallback callback) {
-        isCancelled = false;
-
-        if (complaint == null || (complaint.getTitle() == null && complaint.getDescription() == null)) {
-            callback.onAnalysisError("Complaint content is empty. Please provide title and description.", false);
+    @Override public void analyzeComplaint(Complaint complaint, AiAnalysisCallback callback) {
+        if (callback == null) return;
+        if (complaint == null || (isBlank(complaint.getTitle()) && isBlank(complaint.getDescription()))) {
+            callback.onAnalysisError("Complaint title or description is required.", false);
             return;
         }
 
-        // Simulate async AI inference or secure backend call
-        new Thread(() -> {
-            try {
-                // Simulate network latency (500ms)
-                Thread.sleep(500);
-
-                if (isCancelled) {
-                    return;
+        cancelAnalysis();
+        int generation = ++activeGeneration;
+        try {
+            GenerativeModel model = FirebaseAI.getInstance(GenerativeBackend.googleAI())
+                    .generativeModel(MODEL_NAME);
+            GenerativeModelFutures futuresModel = GenerativeModelFutures.from(model);
+            String promptText = buildPrompt(complaint);
+            Content prompt = new Content.Builder().addText(promptText).build();
+            ListenableFuture<GenerateContentResponse> request = futuresModel.generateContent(prompt);
+            activeRequest = request;
+            Futures.addCallback(request, new FutureCallback<GenerateContentResponse>() {
+                @Override public void onSuccess(GenerateContentResponse response) {
+                    if (generation != activeGeneration) return;
+                    try {
+                        callback.onAnalysisComplete(parseResult(response.getText()));
+                    } catch (Exception error) {
+                        callback.onAnalysisError("AI returned an unreadable triage result. Please retry.", true);
+                    }
                 }
 
-                AiAnalysisResult result = performLocalTriageHeuristics(complaint);
-
-                mainHandler.post(() -> {
-                    if (!isCancelled) {
-                        callback.onAnalysisComplete(result);
-                    }
-                });
-            } catch (InterruptedException e) {
-                mainHandler.post(() -> callback.onAnalysisError("AI Analysis was interrupted.", true));
-            } catch (Exception e) {
-                mainHandler.post(() -> callback.onAnalysisError("AI Analysis error: " + e.getMessage(), true));
-            }
-        }).start();
-    }
-
-    @Override
-    public void cancelAnalysis() {
-        isCancelled = true;
-    }
-
-    /**
-     * Local triage logic to ensure immediate functionality and offline testability.
-     */
-    private AiAnalysisResult performLocalTriageHeuristics(Complaint complaint) {
-        String text = ((complaint.getTitle() != null ? complaint.getTitle() : "") + " " +
-                (complaint.getDescription() != null ? complaint.getDescription() : "")).toLowerCase();
-
-        AiAnalysisResult result = new AiAnalysisResult();
-
-        if (text.contains("danger") || text.contains("collapse") || text.contains("fire") ||
-                text.contains("school") || text.contains("pothole") || text.contains("accident") ||
-                text.contains("spark") || text.contains("gas leak")) {
-            result.setPriority(Priority.HIGH);
-            result.setSeverity("Critical");
-            result.setUrgency("Immediate (< 12 hours)");
-            result.setSafetyRisk("Elevated risk to public safety and physical harm");
-            result.setAffectedPeople(350);
-            result.setConfidence(0.92f);
-            result.setReason("Keywords indicate active safety hazards and high pedestrian/traffic exposure.");
-            result.setSuggestedDepartment("Emergency Infrastructure & Public Safety");
-            result.setSuggestedAction("Dispatch emergency inspection unit and deploy safety perimeter");
-        } else if (text.contains("water") || text.contains("drainage") || text.contains("garbage") ||
-                text.contains("sewage") || text.contains("street light") || text.contains("leak")) {
-            result.setPriority(Priority.MEDIUM);
-            result.setSeverity("Moderate");
-            result.setUrgency("Standard (24-48 hours)");
-            result.setSafetyRisk("Sanitation and public inconvenience");
-            result.setAffectedPeople(120);
-            result.setConfidence(0.85f);
-            result.setReason("Civic amenity malfunction affecting localized residential or commercial access.");
-            result.setSuggestedDepartment("Municipal Works & Sanitation");
-            result.setSuggestedAction("Assign work order to zonal contractor for scheduled repair");
-        } else {
-            result.setPriority(Priority.LOW);
-            result.setSeverity("Minor");
-            result.setUrgency("Routine (3-5 days)");
-            result.setSafetyRisk("Low / Non-hazardous");
-            result.setAffectedPeople(25);
-            result.setConfidence(0.78f);
-            result.setReason("Routine maintenance or aesthetic civic concern.");
-            result.setSuggestedDepartment("Civic Maintenance");
-            result.setSuggestedAction("Add to weekly maintenance schedule");
+                @Override public void onFailure(Throwable error) {
+                    if (generation == activeGeneration) callback.onAnalysisError(
+                            "Gemini analysis failed. Check Firebase AI Logic setup or try again.", true);
+                }
+            }, mainExecutor);
+        } catch (Exception error) {
+            callback.onAnalysisError("Firebase AI Logic is not configured for this Firebase project.", false);
         }
+    }
 
-        result.setSummary(complaint.getTitle() != null ? complaint.getTitle() : "Civic Complaint");
-        result.setCategory(complaint.getCategory() != null ? complaint.getCategory() : "General Civic");
+    private String buildPrompt(Complaint complaint) {
+        String title = redactContactInfo(complaint.getTitle());
+        String description = redactContactInfo(complaint.getDescription());
+        String category = redactContactInfo(complaint.getCategory());
+        return "You are a civic complaint triage assistant. Analyze the report and return only a JSON object "
+                + "with keys summary, category, severity, urgency, safetyRisk, affectedPeople, priority, reason, "
+                + "suggestedDepartment, suggestedAction, confidence. priority must be HIGH, MEDIUM, or LOW. "
+                + "confidence must be a number from 0 to 1. Estimate affectedPeople conservatively; use 0 if unknown. "
+                + "Recommend one responsible municipal department and an initial inspection/action. "
+                + "This is advisory triage only; never claim an official assignment or decision. "
+                + "Do not infer facts not stated in the report.\n"
+                + "Title: " + safe(title) + "\nCategory: " + safe(category) + "\nDescription: " + safe(description);
+    }
 
+    private AiAnalysisResult parseResult(String responseText) throws Exception {
+        if (isBlank(responseText)) throw new IllegalArgumentException("Empty model response");
+        int start = responseText.indexOf('{');
+        int end = responseText.lastIndexOf('}');
+        if (start < 0 || end <= start) throw new IllegalArgumentException("Missing JSON object");
+        JSONObject json = new JSONObject(responseText.substring(start, end + 1));
+        AiAnalysisResult result = new AiAnalysisResult();
+        result.setSummary(json.optString("summary", "Civic complaint triage"));
+        result.setCategory(json.optString("category", "General Civic"));
+        result.setSeverity(json.optString("severity", "Needs review"));
+        result.setUrgency(json.optString("urgency", "Needs review"));
+        result.setSafetyRisk(json.optString("safetyRisk", "Needs review"));
+        result.setAffectedPeople(Math.max(0, json.optInt("affectedPeople", 0)));
+        try {
+            result.setPriority(Priority.valueOf(json.optString("priority", "MEDIUM").trim().toUpperCase(Locale.US)));
+        } catch (IllegalArgumentException ignored) {
+            result.setPriority(Priority.MEDIUM);
+        }
+        result.setReason(json.optString("reason", "Municipal review recommended."));
+        result.setSuggestedDepartment(json.optString("suggestedDepartment", "Municipal Intake"));
+        result.setSuggestedAction(json.optString("suggestedAction", "Review and inspect the report."));
+        result.setConfidence(Math.max(0f, Math.min(1f, (float) json.optDouble("confidence", 0.5))));
         return result;
+    }
+
+    private String redactContactInfo(String value) {
+        if (value == null) return "";
+        return value.replaceAll("(?i)[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}", "[redacted email]")
+                .replaceAll("(?<!\\d)(?:\\+?\\d[\\d ()-]{8,}\\d)(?!\\d)", "[redacted phone]");
+    }
+
+    private String safe(String value) { return value == null ? "" : value.trim(); }
+    private boolean isBlank(String value) { return value == null || value.trim().isEmpty(); }
+
+    @Override public void cancelAnalysis() {
+        activeGeneration++;
+        ListenableFuture<?> request = activeRequest;
+        if (request != null) request.cancel(true);
+        activeRequest = null;
     }
 }

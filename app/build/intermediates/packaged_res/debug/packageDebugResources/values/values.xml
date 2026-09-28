@@ -7,6 +7,21 @@
     <color name="black">#000000</color>
     <color name="border_color">#E4E7EC</color>
     <color name="card_surface">#FFFFFF</color>
+    <color name="civic_ai_accent">#7A5AF8</color>
+    <color name="civic_ai_bg">#F4F3FF</color>
+    <color name="civic_ai_border">#D9D6FE</color>
+    <color name="civic_bg">#F7F9FC</color>
+    <color name="civic_border">#E4E7EC</color>
+    <color name="civic_divider">#F2F4F7</color>
+    <color name="civic_navy">#0B1F3A</color>
+    <color name="civic_primary">#155EEF</color>
+    <color name="civic_primary_variant">#1044B2</color>
+    <color name="civic_surface">#FFFFFF</color>
+    <color name="civic_surface_container">#F1F3FF</color>
+    <color name="civic_text_muted">#98A2B3</color>
+    <color name="civic_text_primary">#172B4D</color>
+    <color name="civic_text_secondary">#667085</color>
+    <color name="civic_text_white">#FFFFFF</color>
     <color name="dark_navy">#0B1F3A</color>
     <color name="gray_100">#F2F4F7</color>
     <color name="gray_200">#E4E7EC</color>
@@ -23,6 +38,15 @@
     <color name="medium_priority_bg">#FEF0C7</color>
     <color name="primary_blue">#155EEF</color>
     <color name="primary_text">#172B4D</color>
+    <color name="priority_high">#F04438</color>
+    <color name="priority_high_bg">#FEF3F2</color>
+    <color name="priority_high_border">#FECDCA</color>
+    <color name="priority_low">#12B76A</color>
+    <color name="priority_low_bg">#ECFDF3</color>
+    <color name="priority_low_border">#A6F4C5</color>
+    <color name="priority_medium">#F79009</color>
+    <color name="priority_medium_bg">#FFFAEB</color>
+    <color name="priority_medium_border">#FEDF89</color>
     <color name="secondary_text">#667085</color>
     <color name="status_assigned">#7A5AF8</color>
     <color name="status_assigned_bg">#F4EBFF</color>
@@ -55,6 +79,12 @@
     <dimen name="text_sm">14sp</dimen>
     <dimen name="text_xl">22sp</dimen>
     <dimen name="text_xs">12sp</dimen>
+    <item name="avatar_devanshi" type="drawable">@drawable/ic_profile</item>
+    <item name="ic_bell" type="drawable">@drawable/ic_notifications</item>
+    <item name="ic_civicai_logo" type="drawable">@drawable/ic_ai_sparkle</item>
+    <item name="ic_file_list" type="drawable">@drawable/ic_list</item>
+    <item name="ic_speaker" type="drawable">@drawable/ic_report</item>
+    <item name="ic_track_radar" type="drawable">@drawable/ic_map</item>
     <string name="ai_analyzing">Analyzing complaint with AI…</string>
     <string name="ai_disclaimer">AI recommendations are advisory decision-support and do not replace authorized government decisions.</string>
     <string name="ai_recommendation">AI Recommendation</string>
@@ -66,6 +96,12 @@
     <string name="btn_submit">Submit Complaint</string>
     <string name="btn_update_status">Update Status</string>
     <string name="btn_view_details">View Details</string>
+    <string name="default_web_client_id" translatable="false">35555831312-hdto8ig1juass4fk9giub7ig079b6ep5.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">35555831312</string>
+    <string name="google_api_key" translatable="false">AIzaSyB1Gmh12tA5T-5WHn4v5ZoOot3jqrdI9MI</string>
+    <string name="google_app_id" translatable="false">1:35555831312:android:770c14f7cf35948d96e495</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyB1Gmh12tA5T-5WHn4v5ZoOot3jqrdI9MI</string>
+    <string name="google_storage_bucket" translatable="false">civicai-6789ffa0.firebasestorage.app</string>
     <string name="loading">Loading…</string>
     <string name="nav_analytics">Analytics</string>
     <string name="nav_clusters">Clusters</string>
@@ -82,6 +118,7 @@
     <string name="priority_high">High Priority</string>
     <string name="priority_low">Low Priority</string>
     <string name="priority_medium">Medium Priority</string>
+    <string name="project_id" translatable="false">civicai-6789ffa0</string>
     <string name="role_citizen">Citizen</string>
     <string name="role_government">Government Official</string>
     <string name="select_role_prompt">Select your workspace role to proceed</string>
@@ -91,6 +128,16 @@
     <string name="status_resolved">Resolved</string>
     <string name="status_submitted">Submitted</string>
     <string name="status_under_review">Under Review</string>
+    <style name="CardRounded12" parent="Widget.MaterialComponents.CardView">
+<item name="cardCornerRadius">12dp</item><item name="cardElevation">2dp</item><item name="strokeWidth">1dp</item><item name="strokeColor">@color/civic_border</item><item name="cardBackgroundColor">@color/civic_surface</item>
+</style>
+    <style name="CardRounded16" parent="Widget.MaterialComponents.CardView">
+<item name="cardCornerRadius">16dp</item><item name="cardElevation">1dp</item><item name="strokeWidth">0dp</item><item name="cardBackgroundColor">@color/civic_surface</item>
+</style>
+    <style name="CircleImageView">
+<item name="cornerFamily">rounded</item>
+<item name="cornerSize">50%</item>
+</style>
     <style name="CivicAi.Button.Ai" parent="Widget.Material3.Button">
         <item name="backgroundTint">@color/ai_accent</item>
         <item name="android:textColor">@color/white</item>

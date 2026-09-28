@@ -16,42 +16,13 @@ public class NotificationRepository implements INotificationRepository {
     private static NotificationRepository instance;
     private final List<AppNotification> notifications = new ArrayList<>();
 
-    private NotificationRepository() {
-        initSampleNotifications();
-    }
+    private NotificationRepository() { }
 
     public static synchronized NotificationRepository getInstance() {
         if (instance == null) {
             instance = new NotificationRepository();
         }
         return instance;
-    }
-
-    private void initSampleNotifications() {
-        AppNotification n1 = new AppNotification(
-                "NOTIF-1",
-                "usr_citizen_01",
-                UserRole.CITIZEN,
-                "Complaint Status Updated",
-                "Your complaint regarding 'Open pothole on Main Street' is now Under Review.",
-                "STATUS_UPDATE",
-                "CMP-001"
-        );
-        n1.setTimestamp(System.currentTimeMillis() - 3600000);
-
-        AppNotification n2 = new AppNotification(
-                "NOTIF-2",
-                "usr_gov_01",
-                UserRole.GOVERNMENT_OFFICIAL,
-                "Critical Priority Triage Alert",
-                "AI prioritized a new complaint #CMP-001 as HIGH priority in Ward 12.",
-                "PRIORITY_ALERT",
-                "CMP-001"
-        );
-        n2.setTimestamp(System.currentTimeMillis() - 1800000);
-
-        notifications.add(n1);
-        notifications.add(n2);
     }
 
     @Override

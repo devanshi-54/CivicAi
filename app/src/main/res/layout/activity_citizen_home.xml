@@ -75,18 +75,19 @@
                 android:id="@+id/tvGreeting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Good Morning, Devanshi"
+                android:text="Welcome, Citizen"
                 android:textColor="@color/civic_navy"
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tvCitizenLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:drawableStart="@drawable/ic_verified_badge"
                 android:drawablePadding="4dp"
-                android:text="Downtown Ward 4 • Verified Citizen"
+                android:text="Citizen account"
                 android:textColor="@color/civic_text_secondary"
                 android:textSize="13sp" />
 

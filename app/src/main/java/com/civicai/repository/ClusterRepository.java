@@ -16,30 +16,13 @@ public class ClusterRepository implements IClusterRepository {
     private static ClusterRepository instance;
     private final Map<String, IssueCluster> clusterCache = new HashMap<>();
 
-    private ClusterRepository() {
-        initSampleClusters();
-    }
+    private ClusterRepository() { }
 
     public static synchronized ClusterRepository getInstance() {
         if (instance == null) {
             instance = new ClusterRepository();
         }
         return instance;
-    }
-
-    private void initSampleClusters() {
-        IssueCluster cl1 = new IssueCluster(
-                "CLS-101",
-                "Road Cavities & Drainage Failure on 5th Cross",
-                "Roads & Drainage",
-                "Indiranagar 5th Cross (500m radius)",
-                12.9783,
-                77.6408,
-                0.91f,
-                "4 independent citizen complaints within 300 meters reporting road collapse following heavy rain."
-        );
-        cl1.setStatus(ClusterStatus.NEEDS_REVIEW);
-        clusterCache.put(cl1.getClusterId(), cl1);
     }
 
     @Override

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "35555831312",
+    "project_id": "civicai-6789ffa0",
+    "storage_bucket": "civicai-6789ffa0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:35555831312:android:770c14f7cf35948d96e495",
+        "android_client_info": {
+          "package_name": "com.civicai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "35555831312-hdto8ig1juass4fk9giub7ig079b6ep5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1Gmh12tA5T-5WHn4v5ZoOot3jqrdI9MI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "35555831312-hdto8ig1juass4fk9giub7ig079b6ep5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

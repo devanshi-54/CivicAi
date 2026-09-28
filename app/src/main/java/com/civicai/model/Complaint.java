@@ -42,6 +42,9 @@ public class Complaint implements Serializable {
     private String officialDecision;
     private String internalNotes;
     private String resolutionDetails;
+    private String citizenFeedback;
+    private int citizenFeedbackRating;
+    private long feedbackSubmittedAt;
 
     // Cluster Fields
     private String clusterId;
@@ -146,6 +149,13 @@ public class Complaint implements Serializable {
 
     public String getResolutionDetails() { return resolutionDetails; }
     public void setResolutionDetails(String resolutionDetails) { this.resolutionDetails = resolutionDetails; }
+
+    public String getCitizenFeedback() { return citizenFeedback; }
+    public void setCitizenFeedback(String citizenFeedback) { this.citizenFeedback = citizenFeedback; }
+    public int getCitizenFeedbackRating() { return citizenFeedbackRating; }
+    public void setCitizenFeedbackRating(int citizenFeedbackRating) { this.citizenFeedbackRating = citizenFeedbackRating; }
+    public long getFeedbackSubmittedAt() { return feedbackSubmittedAt; }
+    public void setFeedbackSubmittedAt(long feedbackSubmittedAt) { this.feedbackSubmittedAt = feedbackSubmittedAt; }
 
     // Cluster Getters & Setters
     public String getClusterId() { return clusterId; }

@@ -28,6 +28,13 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="Photo: Ministry of Environment, Forest and Climate Change, India • GODL-India"
+        android:textColor="@color/civic_text_muted"
+        android:textSize="10sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:text="Track What Happens Next"
         android:textColor="@color/civic_navy"

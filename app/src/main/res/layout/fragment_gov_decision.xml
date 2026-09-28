@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_gov_decision_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background_light">
+
+    <!-- Navigation Header -->
+    <LinearLayout
+        android:id="@+id/gov_decision_nav_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/card_surface"
+        android:gravity="center_vertical"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_decision_back"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="Back"
+            android:textSize="12sp"
+            android:textColor="@color/primary_text"
+            app:icon="@drawable/ic_arrow_back"
+            app:iconSize="16dp"
+            app:iconTint="@color/primary_text"
+            android:paddingStart="8dp"
+            android:paddingEnd="12dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Official Government Decision"
+            android:textColor="@color/primary_text"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:paddingStart="6dp"
+            android:paddingEnd="6dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_decision_home"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="Home"
+            android:textSize="12sp"
+            android:textColor="@color/primary_text"
+            app:icon="@drawable/ic_home"
+            app:iconSize="16dp"
+            app:iconTint="@color/primary_text"
+            android:paddingStart="8dp"
+            android:paddingEnd="12dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/border_color" />
+
+    <ScrollView
+        android:id="@+id/gov_decision_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/background_light">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Header Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/decision_header_card"
+            style="@style/CivicAi.Card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/dark_navy">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="18dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="6dp">
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_verified_badge"
+                        android:contentDescription="Official decision"
+                        app:tint="@color/white" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="Official Government Decision"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/decision_complaint_title_preview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Complaint: —"
+                    android:textColor="#90CAF9"
+                    android:textSize="12sp"
+                    android:maxLines="2"
+                    android:ellipsize="end" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="This decision will be recorded as the authoritative government response."
+                    android:textColor="#B0BEC5"
+                    android:textSize="11sp"
+                    android:textStyle="italic"
+                    android:layout_marginTop="6dp"
+                    android:lineSpacingMultiplier="1.3" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Decision Form Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/decision_form_card"
+            style="@style/CivicAi.Card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DECISION DETAILS"
+                    android:textColor="@color/primary_blue"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.08"
+                    android:layout_marginBottom="14dp" />
+
+                <!-- Official Priority Spinner -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Official Priority *"
+                    android:textColor="@color/primary_text"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="6dp" />
+
+                <Spinner
+                    android:id="@+id/spinner_official_priority"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_card_bordered"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:layout_marginBottom="14dp" />
+
+                <!-- Assigned Department -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layout_assigned_department"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:hint="Assigned Department *">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/input_assigned_department"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:imeOptions="actionNext" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Assigned Officer -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layout_assigned_officer"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:hint="Assigned Officer">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/input_assigned_officer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:imeOptions="actionNext" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Official Decision -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layout_official_decision"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:hint="Official Decision *">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/input_official_decision"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textMultiLine"
+                        android:minLines="3"
+                        android:gravity="top"
+                        android:imeOptions="actionNext" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Internal Notes -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layout_internal_notes"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="14dp"
+                    android:hint="Internal Notes (optional)">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/input_internal_notes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textMultiLine"
+                        android:minLines="2"
+                        android:gravity="top" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Status Spinner -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Update Complaint Status *"
+                    android:textColor="@color/primary_text"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="6dp" />
+
+                <Spinner
+                    android:id="@+id/spinner_complaint_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_card_bordered"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:layout_marginBottom="4dp" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Submit Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_submit_decision"
+            style="@style/CivicAi.Button.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:text="Submit Official Decision"
+            android:textSize="15sp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Cancel Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_cancel_decision"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Cancel"
+            android:textSize="14sp"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Progress -->
+        <ProgressBar
+            android:id="@+id/decision_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+</ScrollView>
+
+</LinearLayout>

@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -33,6 +34,7 @@ android {
 
     buildFeatures {
         viewBinding true
+        buildConfig true
     }
 }
 
@@ -54,12 +56,16 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.8.5'
 
     // Firebase (BOM & core services)
-    implementation platform('com.google.firebase:firebase-bom:33.7.0')
+    implementation platform('com.google.firebase:firebase-bom:34.19.0')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-firestore'
     implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.firebase:firebase-storage'
     implementation 'com.google.firebase:firebase-messaging'
+    implementation 'com.google.firebase:firebase-ai'
+    implementation 'com.google.firebase:firebase-appcheck-playintegrity'
+    debugImplementation 'com.google.firebase:firebase-appcheck-debug'
+    implementation 'com.google.guava:guava:31.0.1-android'
 
     // Location & Maps
     implementation 'com.google.android.gms:play-services-maps:19.0.0'

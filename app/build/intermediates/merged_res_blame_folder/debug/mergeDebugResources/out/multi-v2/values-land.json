@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.civicai.app-mergeDebugResources-2:/values-land/values-land.xml",
+            "outputFile": "com.civicai.app-mergeDebugResources-3:/values-land/values-land.xml",
             "map": [
                 {
                     "source": "C:\\Users\\devan\\.gradle\\caches\\8.13\\transforms\\9cd1cd3a17b47316d12bc9f5872e5a23\\transformed\\appcompat-1.7.0\\res\\values-land\\values-land.xml",

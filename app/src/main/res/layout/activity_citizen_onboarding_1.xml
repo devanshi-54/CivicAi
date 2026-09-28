@@ -28,6 +28,13 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="Photo: Biswarup Ganguly • CC BY 3.0 • Wikimedia Commons"
+        android:textColor="@color/civic_text_muted"
+        android:textSize="10sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:text="Report Civic Issues Easily"
         android:textColor="@color/civic_navy"
