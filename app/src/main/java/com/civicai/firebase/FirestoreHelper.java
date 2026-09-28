@@ -156,7 +156,7 @@ public class FirestoreHelper {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             db.collection(FirebaseConfig.COLLECTION_COMPLAINTS)
                     .document(complaintId)
-                    .get(Source.SERVER)
+.get(Source.SERVER)
                     .addOnSuccessListener(documentSnapshot -> {
                         if (documentSnapshot != null && documentSnapshot.exists()) {
                             try {
@@ -373,9 +373,6 @@ public class FirestoreHelper {
             if (callback != null) {
                 callback.onError(e);
             }
-        }
-    }
-
     public static void submitComplaintFeedback(String complaintId, String userId, int rating, String message,
                                                RepositoryCallback<Void> callback) {
         if (complaintId == null || complaintId.trim().isEmpty() || userId == null || userId.trim().isEmpty()) {

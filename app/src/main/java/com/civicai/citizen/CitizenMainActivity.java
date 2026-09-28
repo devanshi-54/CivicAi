@@ -44,6 +44,9 @@ import com.civicai.firebase.FirestoreHelper;
 import com.civicai.model.AiAnalysisResult;
 import com.civicai.model.Complaint;
 import com.civicai.model.ComplaintStatus;
+import com.civicai.model.AiAnalysisResult;
+import com.civicai.model.Complaint;
+import com.civicai.model.ComplaintStatus;
 import com.civicai.model.User;
 import com.civicai.repository.ComplaintRepository;
 import com.civicai.repository.RepositoryCallback;
@@ -766,7 +769,7 @@ public class CitizenMainActivity extends AppCompatActivity {
 
             @Override
             public void onError(Exception exception) {
-                Log.w("CitizenMainActivity", "Firebase status refresh failed: " + exception.getMessage());
+                Log.w("CitizenMainActivity", "Firebase status refresh failed; using local complaint cache: " + exception.getMessage());
                 if (currentScreen == R.layout.activity_citizen_complaint_details
                         && complaintId.equals(currentComplaintId)) {
                     Complaint cached = CitizenComplaintStore.findComplaint(CitizenMainActivity.this, complaintId);

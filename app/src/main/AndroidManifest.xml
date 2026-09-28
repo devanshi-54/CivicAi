@@ -29,8 +29,6 @@
             android:name=".government.GovMainActivity"
             android:exported="true"
             android:theme="@style/Theme.CivicAI"
-            android:label="@string/role_government" >
-
-        </activity>
+            android:label="@string/role_government" />
     </application>
 </manifest>
