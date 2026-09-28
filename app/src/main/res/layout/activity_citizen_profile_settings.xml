@@ -52,18 +52,20 @@
                     android:src="@drawable/avatar_devanshi" />
 
                 <TextView
+                    android:id="@+id/tvProfileName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Devanshi"
+                    android:text="Name"
                     android:textColor="@color/civic_navy"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tvProfileEmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="devanshi@example.com • Ward 4"
+                    android:text="email@example.com • Ward"
                     android:textColor="@color/civic_text_secondary"
                     android:textSize="13sp" />
             </LinearLayout>

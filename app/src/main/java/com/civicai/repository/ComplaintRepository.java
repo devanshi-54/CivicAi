@@ -13,6 +13,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.civicai.model.User;
 
 /**
  * Concrete implementation of IComplaintRepository.
@@ -35,56 +38,19 @@ public class ComplaintRepository implements IComplaintRepository {
     }
 
     private void initSampleData() {
-        // Initialize representative sample records for UI verification
-        Complaint c1 = new Complaint();
-        c1.setComplaintId("CMP-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase());
-        c1.setUserId("user_citizen_1");
-        c1.setCitizenName("Rajesh Kumar");
-        c1.setTitle("Dangerous open pothole on Main High Street");
-        c1.setDescription("Deep pothole near school crossing causing traffic hazards and two-wheeler accidents.");
-        c1.setCategory("Roads & Infrastructure");
-        c1.setLocationAddress("42 MG Road, Ward 12");
-        c1.setLatitude(12.9716);
-        c1.setLongitude(77.5946);
-        c1.setCreatedAt(System.currentTimeMillis() - 7200000);
-        c1.setStatus(ComplaintStatus.SUBMITTED);
-        c1.setAiPriority(Priority.HIGH);
-        c1.setAiSeverity("Critical");
-        c1.setAiUrgency("Immediate (School Zone)");
-        c1.setAiSafetyRisk("High accident probability");
-        c1.setAiAffectedPeople(450);
-        c1.setAiConfidence(0.94f);
-        c1.setSuggestedDepartment("Roads & Highway Maintenance");
-        c1.setSuggestedAction("Emergency patch and barricading");
-        c1.setAiReason("High traffic density and proximity to elementary school entrance increases risk severity.");
-        memoryCache.put(c1.getComplaintId(), c1);
-
-        Complaint c2 = new Complaint();
-        c2.setComplaintId("CMP-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase());
-        c2.setUserId("user_citizen_2");
-        c2.setCitizenName("Priya Sharma");
-        c2.setTitle("Overflowing drainage pipe near Market Square");
-        c2.setDescription("Sewage water overflowing onto pedestrian sidewalk for the past 24 hours.");
-        c2.setCategory("Water & Sewage");
-        c2.setLocationAddress("Sector 4 Market Square");
-        c2.setLatitude(12.9780);
-        c2.setLongitude(77.6010);
-        c2.setCreatedAt(System.currentTimeMillis() - 18000000);
-        c2.setStatus(ComplaintStatus.UNDER_REVIEW);
-        c2.setAiPriority(Priority.MEDIUM);
-        c2.setAiSeverity("Moderate");
-        c2.setAiUrgency("Within 24-48 Hours");
-        c2.setAiSafetyRisk("Sanitation hazard");
-        c2.setAiAffectedPeople(200);
-        c2.setAiConfidence(0.88f);
-        c2.setSuggestedDepartment("Water Supply & Sewerage Board");
-        c2.setSuggestedAction("Deploy suction vehicle and inspect blockage");
-        c2.setAiReason("Public health risk due to stagnant wastewater in high-footfall commercial area.");
-        memoryCache.put(c2.getComplaintId(), c2);
+        // Disabled for production. Actual data must come from Firestore.
     }
 
     @Override
     public void submitComplaint(Complaint complaint, RepositoryCallback<String> callback) {
+        FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (fUser == null) {
+            if (callback != null) {
+                callback.onError(new IllegalStateException("Please sign in to continue."));
+            }
+            return;
+        }
+
         if (complaint == null) {
             if (callback != null) {
                 callback.onError(new IllegalArgumentException("Complaint cannot be null"));
@@ -92,6 +58,24 @@ public class ComplaintRepository implements IComplaintRepository {
             return;
         }
 
+        // Force ownership to authenticated user
+        complaint.setUserId(fUser.getUid());
+
+        UserRepository.getInstance().getCurrentUser(new RepositoryCallback<User>() {
+            @Override
+            public void onSuccess(User user) {
+                complaint.setCitizenName(user.getName() != null && !user.getName().isEmpty() ? user.getName() : "Citizen");
+                proceedSubmit(complaint, callback);
+            }
+            @Override
+            public void onError(Exception e) {
+                complaint.setCitizenName("Citizen");
+                proceedSubmit(complaint, callback);
+            }
+        });
+    }
+
+    private void proceedSubmit(Complaint complaint, RepositoryCallback<String> callback) {
         if (complaint.getComplaintId() == null || complaint.getComplaintId().isEmpty()) {
             complaint.setComplaintId("CMP-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase());
         }
