@@ -72,6 +72,11 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
+import com.civicai.citizen.voice.ChatAdapter;
+import com.civicai.citizen.voice.ConversationEngine;
+import com.civicai.citizen.voice.ConversationState;
+import com.civicai.citizen.voice.VoiceManager;
+
 /** Citizen-facing screens and the local-first complaint reporting workflow. */
 public class CitizenMainActivity extends AppCompatActivity {
     private final ArrayDeque<Integer> screenHistory = new ArrayDeque<>();
@@ -84,6 +89,12 @@ public class CitizenMainActivity extends AppCompatActivity {
     private ActivityResultLauncher<String[]> galleryPicker;
     private ActivityResultLauncher<Void> cameraPicker;
     private ActivityResultLauncher<String[]> locationPermissionRequest;
+    private ActivityResultLauncher<String> audioPermissionRequest;
+
+    // Voice Assistant Components
+    private VoiceManager voiceManager;
+    private ConversationEngine conversationEngine;
+    private ChatAdapter chatAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,11 +103,28 @@ public class CitizenMainActivity extends AppCompatActivity {
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override public void handleOnBackPressed() { goBack(); }
         });
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override public void handleOnBackPressed() { goBack(); }
+        });
+
         if (!isRegistrationComplete(getCurrentProfile())) {
             currentScreen = R.layout.activity_citizen_onboarding_1;
         //    currentScreen = R.layout.activity_citizen_profile_settings;
         }
+
+        audioPermissionRequest = registerForActivityResult(new ActivityResultContracts.RequestPermission(), result -> {
+            if (result && voiceManager != null) voiceManager.startListening();
+            else Toast.makeText(this, "Microphone permission required for voice assistant", Toast.LENGTH_SHORT).show();
+        });
+
         showScreen(currentScreen, false);
+        showScreen(currentScreen, false);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (voiceManager != null) voiceManager.destroy();
     }
 
     private void registerResultLaunchers() {
@@ -145,8 +173,12 @@ public class CitizenMainActivity extends AppCompatActivity {
         if (layout == R.layout.activity_citizen_ai_analysis) bindAnalysisPreview();
         if (layout == R.layout.activity_citizen_complaint_submitted) bindSubmissionConfirmation();
         if (layout == R.layout.activity_citizen_complaint_details) bindComplaintDetails();
+        if (layout == R.layout.activity_citizen_ai_analysis) bindAnalysisPreview();
+        if (layout == R.layout.activity_citizen_complaint_submitted) bindSubmissionConfirmation();
+        if (layout == R.layout.activity_citizen_complaint_details) bindComplaintDetails();
         if (layout == R.layout.activity_citizen_profile_settings) bindProfile();
         if (layout == R.layout.activity_citizen_home) bindHomeGreeting();
+        if (layout == R.layout.activity_citizen_conversational) setupVoiceAssistant();
         populateLists();
         if (layout == R.layout.activity_citizen_home || layout == R.layout.activity_citizen_my_complaints) {
             syncMyComplaints();
@@ -233,6 +265,8 @@ public class CitizenMainActivity extends AppCompatActivity {
         click(R.id.btnGallery, () -> galleryPicker.launch(new String[]{"image/*"}));
         click(R.id.btnGetLocation, this::requestCurrentLocation);
         click(R.id.btnCopyTicket, this::copyTicketId);
+        click(R.id.fabVoiceAssistant, () -> open(R.layout.activity_citizen_conversational));
+        click(R.id.toolbarVoice, this::goBack);
     }
 
     private void populateLists() {
@@ -713,6 +747,132 @@ public class CitizenMainActivity extends AppCompatActivity {
                 Toast.makeText(CitizenMainActivity.this, "Profile could not be loaded", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void setupVoiceAssistant() {
+        RecyclerView rv = findViewById(R.id.rvConversation);
+        chatAdapter = new ChatAdapter();
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        rv.setAdapter(chatAdapter);
+
+        TextView tvStatus = findViewById(R.id.tvVoiceStatus);
+        EditText etText = findViewById(R.id.etTextInput);
+
+        conversationEngine = new ConversationEngine(new ConversationEngine.ConversationCallback() {
+            @Override
+            public void onSpeak(String text) {
+                runOnUiThread(() -> {
+                    chatAdapter.addMessage(text, false);
+                    rv.smoothScrollToPosition(chatAdapter.getItemCount() - 1);
+                    if (voiceManager != null) voiceManager.speak(text);
+                });
+            }
+
+            @Override
+            public void onStateChanged(ConversationState state, CitizenComplaintStore.Draft draft) {
+                runOnUiThread(() -> {
+                    if (state == ConversationState.FINAL_REVIEW) {
+                        findViewById(R.id.finalReviewContainer).setVisibility(View.VISIBLE);
+                        rv.setVisibility(View.GONE);
+                        ((TextView) findViewById(R.id.tvReviewTitle)).setText(draft.title);
+                        ((TextView) findViewById(R.id.tvReviewCategory)).setText(draft.category);
+                        ((TextView) findViewById(R.id.tvReviewLocation)).setText(draft.locationAddress);
+                        ((TextView) findViewById(R.id.tvReviewDescription)).setText(draft.description);
+                    } else if (state == ConversationState.SUBMITTED) {
+                        findViewById(R.id.finalReviewContainer).setVisibility(View.GONE);
+                        rv.setVisibility(View.VISIBLE);
+                    } else {
+                        findViewById(R.id.finalReviewContainer).setVisibility(View.GONE);
+                        rv.setVisibility(View.VISIBLE);
+                    }
+                });
+            }
+
+            @Override
+            public void onComplaintAction(String action) {
+                runOnUiThread(() -> {
+                    if ("SUBMIT_COMPLAINT".equals(action)) {
+                        CitizenComplaintStore.saveDraft(CitizenMainActivity.this, conversationEngine.getDraft());
+                        submitComplaint();
+                    } else if ("TRACK_COMPLAINTS".equals(action)) {
+                        open(R.layout.activity_citizen_my_complaints);
+                    }
+                });
+            }
+
+            @Override
+            public void onStatus(String status) {
+                runOnUiThread(() -> tvStatus.setText(status));
+            }
+        });
+
+        voiceManager = new VoiceManager(this, new VoiceManager.VoiceCallback() {
+            @Override
+            public void onSpeechRecognized(String text) {
+                runOnUiThread(() -> {
+                    chatAdapter.addMessage(text, true);
+                    rv.smoothScrollToPosition(chatAdapter.getItemCount() - 1);
+                    conversationEngine.processInput(text);
+                });
+            }
+
+            @Override
+            public void onSpeechError(String error) {
+                runOnUiThread(() -> tvStatus.setText("Error: " + error));
+            }
+
+            @Override
+            public void onSpeechStatus(String status) {
+                runOnUiThread(() -> tvStatus.setText(status));
+            }
+        });
+
+        click(R.id.fabMic, () -> {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) {
+                voiceManager.startListening();
+            } else {
+                audioPermissionRequest.launch(Manifest.permission.RECORD_AUDIO);
+            }
+        });
+
+        click(R.id.btnSendText, () -> {
+            String text = etText.getText().toString().trim();
+            if (!text.isEmpty()) {
+                chatAdapter.addMessage(text, true);
+                rv.smoothScrollToPosition(chatAdapter.getItemCount() - 1);
+                conversationEngine.processInput(text);
+                etText.setText("");
+            }
+        });
+
+        etText.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == android.view.inputmethod.EditorInfo.IME_ACTION_SEND || 
+                actionId == android.view.inputmethod.EditorInfo.IME_ACTION_DONE ||
+                (event != null && event.getAction() == android.view.KeyEvent.ACTION_DOWN && event.getKeyCode() == android.view.KeyEvent.KEYCODE_ENTER)) {
+                String text = etText.getText().toString().trim();
+                if (!text.isEmpty()) {
+                    chatAdapter.addMessage(text, true);
+                    rv.smoothScrollToPosition(chatAdapter.getItemCount() - 1);
+                    conversationEngine.processInput(text);
+                    etText.setText("");
+                }
+                return true;
+            }
+            return false;
+        });
+        
+        click(R.id.btnCancelReview, () -> {
+            findViewById(R.id.finalReviewContainer).setVisibility(View.GONE);
+            rv.setVisibility(View.VISIBLE);
+            conversationEngine.processInput("cancel");
+        });
+        
+        click(R.id.btnSubmitReview, () -> {
+            conversationEngine.processInput("submit");
+        });
+
+        // Start conversation
+        conversationEngine.startConversation();
     }
 
     private String createTicketId() {

@@ -330,6 +330,19 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
+    <!-- Voice Assistant FAB -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabVoiceAssistant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="80dp"
+        android:src="@android:drawable/ic_btn_speak_now"
+        app:backgroundTint="@color/civic_primary"
+        app:tint="#FFFFFF"
+        android:contentDescription="Voice Assistant" />
+
     <!-- Bottom Navigation Bar -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
