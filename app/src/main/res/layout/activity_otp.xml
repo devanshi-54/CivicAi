@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_light"
+    android:padding="24dp">
+
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:padding="12dp"
+        android:src="@android:drawable/ic_media_previous"
+        app:tint="@color/primary_text"
+        android:contentDescription="Go back"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="-12dp" />
+
+    <TextView
+        android:id="@+id/tvVerifyTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Verify your number"
+        android:textColor="@color/primary_text"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@id/btnBack" />
+
+    <TextView
+        android:id="@+id/tvVerifySubtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="We sent a verification code to"
+        android:textColor="@color/secondary_text"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tvVerifyTitle" />
+
+    <TextView
+        android:id="@+id/tvPhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="+91 XXXXX XXXXX"
+        android:textColor="@color/primary_text"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/tvVerifySubtitle" />
+
+    <LinearLayout
+        android:id="@+id/llOtpContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@id/tvPhoneNumber">
+
+        <EditText android:id="@+id/etOtp1" style="@style/OtpEditText" />
+        <EditText android:id="@+id/etOtp2" style="@style/OtpEditText" />
+        <EditText android:id="@+id/etOtp3" style="@style/OtpEditText" />
+        <EditText android:id="@+id/etOtp4" style="@style/OtpEditText" />
+        <EditText android:id="@+id/etOtp5" style="@style/OtpEditText" />
+        <EditText android:id="@+id/etOtp6" style="@style/OtpEditText" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvOtpError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/high_priority"
+        android:textSize="14sp"
+        android:visibility="gone"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/llOtpContainer" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnVerify"
+        style="@style/CivicAi.Button.Primary"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="Verify &amp; Continue"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@id/tvOtpError" />
+
+    <ProgressBar
+        android:id="@+id/pbVerifyLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@id/btnVerify"
+        app:layout_constraintBottom_toBottomOf="@id/btnVerify"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@id/btnVerify">
+
+        <TextView
+            android:id="@+id/tvResend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Resend OTP in 30s"
+            android:textColor="@color/secondary_text"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:padding="8dp" />
+
+        <TextView
+            android:id="@+id/tvChangeNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Change mobile number"
+            android:textColor="@color/primary_blue"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:padding="8dp"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

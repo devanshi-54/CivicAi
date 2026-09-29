@@ -46,6 +46,18 @@ public class VoiceManager implements TextToSpeech.OnInitListener, RecognitionLis
             int result = tts.setLanguage(Locale.US);
             if (result != TextToSpeech.LANG_MISSING_DATA && result != TextToSpeech.LANG_NOT_SUPPORTED) {
                 ttsReady = true;
+                tts.setOnUtteranceProgressListener(new android.speech.tts.UtteranceProgressListener() {
+                    @Override
+                    public void onStart(String utteranceId) {}
+                    
+                    @Override
+                    public void onDone(String utteranceId) {
+                        callback.onSpeechStatus("Tap to speak");
+                    }
+                    
+                    @Override
+                    public void onError(String utteranceId) {}
+                });
             } else {
                 Log.e("VoiceManager", "TTS Language not supported");
             }
@@ -83,6 +95,10 @@ public class VoiceManager implements TextToSpeech.OnInitListener, RecognitionLis
             speechRecognizer.stopListening();
             isListening = false;
         }
+    }
+
+    public boolean isCurrentlyListening() {
+        return isListening;
     }
 
     public void destroy() {

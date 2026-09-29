@@ -6,6 +6,10 @@ import com.civicai.model.UserRole;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 /**
  * Repository for User profiles and current session role state.
  */
@@ -40,26 +44,81 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public void getCurrentUser(RepositoryCallback<User> callback) {
-        callback.onSuccess(currentUser);
+        if (isAuthenticated()) {
+            FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();
+            if (fUser == null) {
+                callback.onError(new Exception("Not authenticated"));
+                return;
+            }
+            if (currentUser != null && currentUser.getUserId().equals(fUser.getUid())) {
+                callback.onSuccess(currentUser);
+                return;
+            }
+            
+            FirebaseFirestore.getInstance().collection("users").document(fUser.getUid())
+                .get()
+                .addOnSuccessListener(doc -> {
+                    if (doc.exists()) {
+                        currentUser = doc.toObject(User.class);
+                        callback.onSuccess(currentUser);
+                    } else {
+                        // Create new profile for phone auth user
+                        User newUser = new User(fUser.getUid(), UserRole.CITIZEN, "New Citizen", "", fUser.getPhoneNumber());
+                        saveUser(newUser, new RepositoryCallback<Void>() {
+                            @Override
+                            public void onSuccess(Void result) {
+                                currentUser = newUser;
+                                callback.onSuccess(currentUser);
+                            }
+                            @Override
+                            public void onError(Exception e) {
+                                callback.onError(e);
+                            }
+                        });
+                    }
+                })
+                .addOnFailureListener(e -> callback.onError(e));
+        } else {
+            callback.onError(new Exception("User not authenticated"));
+        }
+    }
+
+    public boolean isAuthenticated() {
+        return com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser() != null;
+    }
+
+    public void setAuthenticated(boolean auth) {
+        if (!auth) {
+            FirebaseAuth.getInstance().signOut();
+            currentUser = null;
+        }
     }
 
     @Override
     public void getUserById(String userId, RepositoryCallback<User> callback) {
-        User u = userCache.get(userId);
-        if (u != null) {
-            callback.onSuccess(u);
-        } else {
-            callback.onError(new Exception("User not found: " + userId));
-        }
+        FirebaseFirestore.getInstance().collection("users").document(userId)
+            .get()
+            .addOnSuccessListener(doc -> {
+                if (doc.exists()) {
+                    callback.onSuccess(doc.toObject(User.class));
+                } else {
+                    callback.onError(new Exception("User not found: " + userId));
+                }
+            })
+            .addOnFailureListener(e -> callback.onError(e));
     }
 
     @Override
     public void saveUser(User user, RepositoryCallback<Void> callback) {
-        userCache.put(user.getUserId(), user);
-        if (currentUser != null && currentUser.getUserId().equals(user.getUserId())) {
-            currentUser = user;
-        }
-        callback.onSuccess(null);
+        FirebaseFirestore.getInstance().collection("users").document(user.getUserId())
+            .set(user)
+            .addOnSuccessListener(aVoid -> {
+                if (currentUser != null && currentUser.getUserId().equals(user.getUserId())) {
+                    currentUser = user;
+                }
+                callback.onSuccess(null);
+            })
+            .addOnFailureListener(e -> callback.onError(e));
     }
 
     @Override
