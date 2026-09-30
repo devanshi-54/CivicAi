@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/gov_dashboard"
+        android:icon="@drawable/ic_dashboard"
+        android:title="@string/nav_dashboard" />
+    <item
+        android:id="@+id/gov_priority_queue"
+        android:icon="@drawable/ic_priority"
+        android:title="@string/nav_priority_queue" />
+    <item
+        android:id="@+id/gov_complaint_map"
+        android:icon="@drawable/ic_map"
+        android:title="@string/nav_map" />
+    <item
+        android:id="@+id/gov_issue_clusters"
+        android:icon="@drawable/ic_cluster"
+        android:title="@string/nav_clusters" />
+    <item
+        android:id="@+id/gov_analytics"
+        android:icon="@drawable/ic_analytics"
+        android:title="@string/nav_analytics" />
+</menu>
