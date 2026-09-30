@@ -1,5 +1,10 @@
 package com.civicai.citizen;
 
+import static androidx.core.content.ContextCompat.getSystemService;
+
+import static java.nio.channels.Selector.open;
+
+import android.inputmethodservice.Keyboard;
 import android.util.Patterns;
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -233,7 +238,69 @@ public class CitizenMainActivity extends AppCompatActivity {
     }
 
     private void populateLists() {
+<<<<<<< Updated upstream
         List<Row> complaintRows = getComplaintRows();
+=======
+        FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (fUser == null) return;
+        
+        ComplaintRepository.getInstance().getComplaintsByUser(fUser.getUid(), new RepositoryCallback<List<Complaint>>() {
+            @Override
+            public void onSuccess(List<Complaint> complaints) {
+                runOnUiThread(() -> {
+                    List<Keyboard.Row> rows = new ArrayList<>();
+                    for (Complaint complaint : complaints) {
+                        ComplaintStatus status = complaint.getStatus() == null ? ComplaintStatus.SUBMITTED : complaint.getStatus();
+                        String date = new SimpleDateFormat("MMM d, yyyy", Locale.getDefault()).format(new Date(complaint.getCreatedAt()));
+                        rows.add(new Keyboard.Row(complaint.getComplaintId(), complaint.getTitle(), date,
+                                status.getDisplayName(), complaint.getLocationAddress(), complaint));
+                    }
+                    bindRows(rows);
+                });
+            }
+
+            @Override
+            public void onError(Exception exception) {
+                Log.e("CitizenMainActivity", "Error fetching complaints", exception);
+            }
+        });
+    }
+
+    private void bindRows(List<Row> complaintRows) {
+        // Calculate and bind stats
+        int total = complaintRows.size();
+        int pending = 0;
+        int inProgress = 0;
+        int resolved = 0;
+        for (Keyboard.Row row : complaintRows) {
+            ComplaintStatus status = row.complaint.getStatus();
+            if (status == null) status = ComplaintStatus.SUBMITTED;
+            switch (status) {
+                case SUBMITTED:
+                case UNDER_REVIEW:
+                    pending++;
+                    break;
+                case IN_PROGRESS:
+                    inProgress++;
+                    break;
+                case RESOLVED:
+                case REJECTED:
+                    resolved++;
+                    break;
+            }
+        }
+        
+        TextView tvTotal = findViewById(R.id.tvTotalLogged);
+        TextView tvPending = findViewById(R.id.tvPendingReview);
+        TextView tvInProgress = findViewById(R.id.tvInProgress);
+        TextView tvResolved = findViewById(R.id.tvResolved);
+        
+        if (tvTotal != null) tvTotal.setText(String.valueOf(total));
+        if (tvPending != null) tvPending.setText(String.valueOf(pending));
+        if (tvInProgress != null) tvInProgress.setText(String.valueOf(inProgress));
+        if (tvResolved != null) tvResolved.setText(String.valueOf(resolved));
+
+>>>>>>> Stashed changes
         RecyclerView recent = findViewById(R.id.rvRecentComplaints);
         if (recent != null) setRows(recent, complaintRows, false);
         RecyclerView complaints = findViewById(R.id.rvMyComplaints);
