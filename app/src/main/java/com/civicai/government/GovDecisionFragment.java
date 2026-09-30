@@ -1,6 +1,5 @@
 package com.civicai.government;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -103,29 +102,10 @@ public class GovDecisionFragment extends Fragment {
         for (int i = 0; i < priorityValues.length; i++) {
             priorityLabels[i] = priorityValues[i].name();
         }
-        ArrayAdapter<String> priorityAdapter = new ArrayAdapter<String>(
+        ArrayAdapter<String> priorityAdapter = new ArrayAdapter<>(
                 requireContext(),
                 android.R.layout.simple_spinner_item,
-                priorityLabels) {
-            @NonNull
-            @Override
-            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                View view = super.getView(position, convertView, parent);
-                if (view instanceof TextView) {
-                    ((TextView) view).setTextColor(Color.BLACK);
-                }
-                return view;
-            }
-
-            @Override
-            public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                View view = super.getDropDownView(position, convertView, parent);
-                if (view instanceof TextView) {
-                    ((TextView) view).setTextColor(Color.BLACK);
-                }
-                return view;
-            }
-        };
+                priorityLabels);
         priorityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerPriority.setAdapter(priorityAdapter);
 
@@ -134,29 +114,10 @@ public class GovDecisionFragment extends Fragment {
         for (int i = 0; i < statusValues.length; i++) {
             statusLabels[i] = statusValues[i].getDisplayName();
         }
-        ArrayAdapter<String> statusAdapter = new ArrayAdapter<String>(
+        ArrayAdapter<String> statusAdapter = new ArrayAdapter<>(
                 requireContext(),
                 android.R.layout.simple_spinner_item,
-                statusLabels) {
-            @NonNull
-            @Override
-            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                View view = super.getView(position, convertView, parent);
-                if (view instanceof TextView) {
-                    ((TextView) view).setTextColor(Color.BLACK);
-                }
-                return view;
-            }
-
-            @Override
-            public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                View view = super.getDropDownView(position, convertView, parent);
-                if (view instanceof TextView) {
-                    ((TextView) view).setTextColor(Color.BLACK);
-                }
-                return view;
-            }
-        };
+                statusLabels);
         statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerStatus.setAdapter(statusAdapter);
     }

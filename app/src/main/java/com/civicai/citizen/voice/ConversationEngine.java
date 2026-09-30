@@ -109,32 +109,9 @@ public class ConversationEngine {
             return;
         }
 
-        if ("TRACK_COMPLAINT".equals(intent) || "CHECK_STATUS".equals(intent) || "LIST_COMPLAINTS".equals(intent) || "OPEN_GRIEVANCES".equals(intent)) {
+        if ("TRACK_COMPLAINT".equals(intent) || "CHECK_STATUS".equals(intent) || "LIST_COMPLAINTS".equals(intent)) {
             callback.onComplaintAction("TRACK_COMPLAINTS");
             callback.onSpeak("Here are your complaints.");
-            return;
-        }
-
-        if ("OPEN_NOTIFICATIONS".equals(intent)) {
-            callback.onComplaintAction("OPEN_NOTIFICATIONS");
-            callback.onSpeak("Opening notifications.");
-            return;
-        }
-
-        if ("OPEN_PROFILE".equals(intent)) {
-            callback.onComplaintAction("OPEN_PROFILE");
-            callback.onSpeak("Opening your profile.");
-            return;
-        }
-
-        if ("GO_HOME".equals(intent)) {
-            callback.onComplaintAction("GO_HOME");
-            callback.onSpeak("Going to the home screen.");
-            return;
-        }
-
-        if ("UNKNOWN".equals(intent)) {
-            callback.onSpeak("I'm sorry, I didn't quite understand that. Could you clarify?");
             return;
         }
 
@@ -173,15 +150,9 @@ public class ConversationEngine {
                 break;
             case CONFIRMING_CATEGORY:
                 if (Boolean.TRUE.equals(response.confirmation)) {
-                    if (!TextUtils.isEmpty(draft.locationAddress) && !TextUtils.isEmpty(draft.description) && !TextUtils.isEmpty(draft.title)) {
-                        currentState = ConversationState.FINAL_REVIEW;
-                        callback.onStateChanged(currentState, draft);
-                        callback.onSpeak("Category updated. Your complaint is ready for review. Would you like to submit it?");
-                    } else {
-                        currentState = ConversationState.COLLECTING_LOCATION;
-                        callback.onStateChanged(currentState, draft);
-                        callback.onSpeak("Where is the " + draft.category + " located?");
-                    }
+                    currentState = ConversationState.COLLECTING_LOCATION;
+                    callback.onStateChanged(currentState, draft);
+                    callback.onSpeak("Where is the " + draft.category + " located?");
                 } else if (Boolean.FALSE.equals(response.confirmation)) {
                     currentState = ConversationState.COLLECTING_CATEGORY;
                     callback.onStateChanged(currentState, draft);
@@ -202,15 +173,9 @@ public class ConversationEngine {
                 break;
             case CONFIRMING_LOCATION:
                 if (Boolean.TRUE.equals(response.confirmation)) {
-                    if (!TextUtils.isEmpty(draft.description) && !TextUtils.isEmpty(draft.title)) {
-                        currentState = ConversationState.FINAL_REVIEW;
-                        callback.onStateChanged(currentState, draft);
-                        callback.onSpeak("Location updated. Your complaint is ready for review. Would you like to submit it?");
-                    } else {
-                        currentState = ConversationState.COLLECTING_DESCRIPTION;
-                        callback.onStateChanged(currentState, draft);
-                        callback.onSpeak("Please describe the issue in detail.");
-                    }
+                    currentState = ConversationState.COLLECTING_DESCRIPTION;
+                    callback.onStateChanged(currentState, draft);
+                    callback.onSpeak("Please describe the issue in detail.");
                 } else if (Boolean.FALSE.equals(response.confirmation)) {
                     currentState = ConversationState.COLLECTING_LOCATION;
                     callback.onStateChanged(currentState, draft);
@@ -231,15 +196,9 @@ public class ConversationEngine {
                 break;
             case CONFIRMING_DESCRIPTION:
                 if (Boolean.TRUE.equals(response.confirmation)) {
-                    if (!TextUtils.isEmpty(draft.title)) {
-                        currentState = ConversationState.FINAL_REVIEW;
-                        callback.onStateChanged(currentState, draft);
-                        callback.onSpeak("Description updated. Your complaint is ready for review. Would you like to submit it?");
-                    } else {
-                        currentState = ConversationState.COLLECTING_TITLE;
-                        callback.onStateChanged(currentState, draft);
-                        callback.onSpeak("Finally, please give this complaint a short title.");
-                    }
+                    currentState = ConversationState.COLLECTING_TITLE;
+                    callback.onStateChanged(currentState, draft);
+                    callback.onSpeak("Finally, please give this complaint a short title.");
                 } else if (Boolean.FALSE.equals(response.confirmation)) {
                     currentState = ConversationState.COLLECTING_DESCRIPTION;
                     callback.onStateChanged(currentState, draft);

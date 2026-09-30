@@ -222,9 +222,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:layout_marginBottom="8dp">
-                        <!-- Citizen column hidden for privacy: government users must not see citizen name.
-                             The TextView ID is kept because Java code may still reference it. -->
-                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:visibility="gone">
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
                             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Citizen" android:textColor="@color/secondary_text" android:textSize="11sp" />
                             <TextView android:id="@+id/detail_citizen_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="—" android:textColor="@color/primary_text" android:textSize="13sp" android:textStyle="bold" />
                         </LinearLayout>

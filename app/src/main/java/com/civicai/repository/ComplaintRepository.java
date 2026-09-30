@@ -13,9 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.civicai.model.User;
 
 /**
  * Complaint access backed by Firestore with a memory cache for local workflows.
@@ -32,42 +29,13 @@ public class ComplaintRepository implements IComplaintRepository {
         return instance;
     }
 
-    private void initSampleData() {
-        // Disabled for production. Actual data must come from Firestore.
-    }
     @Override
     public void submitComplaint(Complaint complaint, RepositoryCallback<String> callback) {
-        FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (fUser == null) {
-            if (callback != null) {
-                callback.onError(new IllegalStateException("Please sign in to continue."));
-            }
-            return;
-        }
-
         if (complaint == null) {
         if (complaint == null) {
             if (callback != null) callback.onError(new IllegalArgumentException("Complaint cannot be null"));
             return;
         }
-        // Force ownership to authenticated user
-        complaint.setUserId(fUser.getUid());
-
-        UserRepository.getInstance().getCurrentUser(new RepositoryCallback<User>() {
-            @Override
-            public void onSuccess(User user) {
-                complaint.setCitizenName(user.getName() != null && !user.getName().isEmpty() ? user.getName() : "Citizen");
-                proceedSubmit(complaint, callback);
-            }
-            @Override
-            public void onError(Exception e) {
-                complaint.setCitizenName("Citizen");
-                proceedSubmit(complaint, callback);
-            }
-        });
-    }
-
-    private void proceedSubmit(Complaint complaint, RepositoryCallback<String> callback) {
         if (complaint.getComplaintId() == null || complaint.getComplaintId().isEmpty()) {
             complaint.setComplaintId("CMP-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase());
         }
